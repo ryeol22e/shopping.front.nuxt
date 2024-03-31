@@ -1,19 +1,17 @@
 <template>
-	<main>
-		<DisplayHeader :title="title" :desc="desc" />
-		<slot />
-	</main>
+  <DisplayHeader :title="title" :desc="desc" />
+  <slot />
 </template>
 
 <script setup lang="ts">
-	const props = defineProps({
-		title: {
-			type: String,
-			default: '',
-		},
-		desc: {
-			type: String,
-			default: '',
-		},
-	});
+  const props = defineProps({
+    title: {
+      type: String,
+      default: '',
+    },
+    desc: {
+      type: String,
+      default: '',
+    },
+  });
 </script>
