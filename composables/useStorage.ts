@@ -1,5 +1,3 @@
-import useUtils from './useUtils';
-
 ('use strict');
 export default () => {
   const { isEmpty } = useUtils();

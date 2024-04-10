@@ -1,9 +1,9 @@
-export interface MemberInfo {
+declare interface MemberInfo {
   memberId: string;
   memberPassword: string;
 }
 
-export interface AnyObject {
+declare interface AnyObject {
   [key: string]: any;
   [key: number]: any;
 }

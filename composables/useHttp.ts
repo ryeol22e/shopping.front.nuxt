@@ -1,6 +1,4 @@
 'use strict';
-import useUtils from './useUtils';
-
 const { isEmpty, hasObjectProperty } = useUtils();
 
 export default () => {
