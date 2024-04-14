@@ -10,7 +10,7 @@ export default defineNuxtPlugin(() => {
           baseURL: config.public.baseApiUrl,
           method: 'get',
           watch: false,
-          server: process.client ? false : true,
+          server: process.server,
           query,
           headers: {
             ...headers,
@@ -31,7 +31,7 @@ export default defineNuxtPlugin(() => {
           baseURL: config.public.baseApiUrl,
           method: 'post',
           watch: false,
-          server: process.client ? false : true,
+          server: process.server,
           body,
           headers: {
             ...headers,

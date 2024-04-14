@@ -46,6 +46,7 @@
       </QBreadcrumbs>
     </QToolbar>
   </QHeader>
+  <NuxtLoadingIndicator />
 </template>
 
 <script setup lang="ts">
