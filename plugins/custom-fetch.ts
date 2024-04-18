@@ -10,6 +10,7 @@ export default defineNuxtPlugin(() => {
           baseURL: config.public.baseApiUrl,
           method: 'get',
           watch: false,
+          lazy: process.client,
           server: process.server,
           query,
           headers: {
@@ -31,6 +32,7 @@ export default defineNuxtPlugin(() => {
           baseURL: config.public.baseApiUrl,
           method: 'post',
           watch: false,
+          lazy: process.client,
           server: process.server,
           body,
           headers: {
