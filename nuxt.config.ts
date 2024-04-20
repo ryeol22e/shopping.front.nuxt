@@ -70,7 +70,7 @@ export default () => {
       },
     },
     components: {
-      dirs: ['~/components'],
+      dirs: [resolve('./components'), '~/components', '@/components'],
     },
     imports: {
       autoImport: true,
