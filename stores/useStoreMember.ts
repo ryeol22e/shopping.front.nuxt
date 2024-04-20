@@ -2,7 +2,8 @@ import useEnum from '@/composables/useEnum';
 
 export const useStoreMember = defineStore('useStoreMember', () => {
   const { MEMBER_CONST } = useEnum();
-  const { $get, $post } = useNuxtApp();
+  const { get, post } = useSetupFetch();
+  const {} = useRunFetch();
 
   const boolLogin = ref(false);
   const boolInfoSet = ref(false);
@@ -24,19 +25,19 @@ export const useStoreMember = defineStore('useStoreMember', () => {
     boolLogin.value = bool;
   };
   const authCheck = async (): Promise<void> => {
-    await $get('/member/auth')
+    await get('/member/auth')
       .then((res: any) => (boolLogin.value = JSON.parse(res.data)))
       .catch((error) => console.log(error));
   };
   const loginProcess = async (param: MemberInfo): Promise<void> => {
-    await $post('/member/login', param)
+    await post('/member/login', param)
       .then((res: any) => {
         boolLogin.value = JSON.parse(res.data);
       })
       .catch((error) => console.log(error));
   };
   const setMemberInfo = async (): Promise<void> => {
-    await $get('/member/info')
+    await get('/member/info')
       .then((res: any) => {
         userInfo.value = res.data;
       })
@@ -46,15 +47,15 @@ export const useStoreMember = defineStore('useStoreMember', () => {
       .catch((error) => console.log(error));
   };
   const logoutProcess = async (): Promise<void> => {
-    await $get('/member/logout').catch((error) => console.log(error));
+    await get('/member/logout').catch((error) => console.log(error));
   };
   const signUpProcess = async (param: any): Promise<void> => {
-    await $post('/member/join', param)
+    await post('/member/join', param)
       .then((res: any) => (signUpResult.value = res.data))
       .catch((error) => console.log(error));
   };
   const setAuthNumber = async (param: any): Promise<void> => {
-    await $post('/member/auth/number', param)
+    await post('/member/auth/number', param)
       .then((res: any) => (authNumber.value = String(res.data).substring(0, res.data.lastIndexOf('.'))))
       .catch((error) => console.log(error));
   };

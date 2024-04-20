@@ -1,5 +1,6 @@
 export const useStoreVariable = defineStore('useStoreVariable', () => {
-  const { $get, $post } = useNuxtApp();
+  const { get } = useSetupFetch();
+  const {} = useRunFetch();
 
   const boolLoading = ref(false);
 

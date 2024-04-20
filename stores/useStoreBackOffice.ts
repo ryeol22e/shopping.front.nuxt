@@ -1,10 +1,11 @@
 export const useStoreBo = defineStore('useStoreBo', () => {
   const router = useRouter();
-  const { $post } = useNuxtApp();
+  const { post } = useSetupFetch();
+  const {} = useRunFetch();
   const bannerInfo = ref({});
 
   const registBannerInfo = (param: any): void => {
-    $post('/admin/banner/save', param)
+    post('/admin/banner/save', param)
       .then((res: any) => {
         const result = res.data;
 

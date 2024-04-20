@@ -1,5 +1,6 @@
 export const useStoreCommon = defineStore('useStoreCommon', () => {
-  const { $get } = useNuxtApp();
+  const { get } = useSetupFetch();
+  const {} = useRunFetch();
 
   const headers = ref([]);
   const adminLnb = ref([]);
@@ -10,17 +11,17 @@ export const useStoreCommon = defineStore('useStoreCommon', () => {
   const getMypageList = computed(() => mypageList.value);
 
   const setHeaders = async (params: any): Promise<void> => {
-    await $get('/common/10000', params)
+    await get('/common/10000', params)
       .then((res: any) => (headers.value = res.data))
       .catch((error) => console.log(error));
   };
   const setAdminLnb = async (params: any): Promise<void> => {
-    await $get('/admin/menu', params)
+    await get('/admin/menu', params)
       .then((res: any) => (adminLnb.value = res.data))
       .catch((error) => console.log(error));
   };
   const setMypageList = async (): Promise<void> => {
-    await $get('/common/10002', {
+    await get('/common/10002', {
       codeType: '10002',
       codeDepth: '1',
       useYn: 'Y',
