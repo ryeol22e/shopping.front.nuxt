@@ -8,7 +8,7 @@ export const useRunFetch = () => {
   const combineURL = (path: string): string => (path.charAt(0) === '/' ? path : '/'.concat(path));
 
   return {
-    async get(path: string, query: any = {}, headers: any = {}): Promise<any> {
+    async get(path: string, query: any = {}, headers: any = {}) {
       return await $fetch(combineURL(path), {
         baseURL: config.public.baseApiUrl,
         method: 'get',
@@ -18,7 +18,7 @@ export const useRunFetch = () => {
         },
       });
     },
-    async post(path: string, body: any = {}, headers: any = {}): Promise<any> {
+    async post(path: string, body: any = {}, headers: any = {}) {
       return await $fetch(combineURL(path), {
         baseURL: config.public.baseApiUrl,
         method: 'post',

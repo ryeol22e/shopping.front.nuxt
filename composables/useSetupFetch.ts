@@ -8,7 +8,7 @@ export const useSetupFetch = () => {
   const combineURL = (path: string): string => (path.charAt(0) === '/' ? path : '/'.concat(path));
 
   return {
-    async get(path: string, query: any = {}, headers: any = {}): Promise<any> {
+    async get(path: string, query: any = {}, headers: any = {}) {
       const { pending, status, data, error } = await useFetch(combineURL(path), {
         baseURL: config.public.baseApiUrl,
         method: 'get',
@@ -22,7 +22,7 @@ export const useSetupFetch = () => {
         },
       });
 
-      return new Promise((resolve, reject): void => {
+      return new Promise((resolve, reject) => {
         if (status.value !== 'error') {
           resolve({ pending: pending.value, status: status.value, data: data.value });
         } else {
@@ -30,7 +30,7 @@ export const useSetupFetch = () => {
         }
       });
     },
-    async post(path: string, body: any = {}, headers: any = {}): Promise<any> {
+    async post(path: string, body: any = {}, headers: any = {}) {
       const { pending, status, data, error } = await useFetch(combineURL(path), {
         baseURL: config.public.baseApiUrl,
         method: 'post',
@@ -44,7 +44,7 @@ export const useSetupFetch = () => {
         },
       });
 
-      return new Promise((resolve, reject): void => {
+      return new Promise((resolve, reject) => {
         if (status.value !== 'error') {
           resolve({ pending: pending.value, status: status.value, data: data.value });
         } else {
