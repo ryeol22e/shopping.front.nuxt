@@ -2,14 +2,13 @@ import useUtils from './useUtils';
 
 const { numberAddZero, isEmpty } = useUtils();
 
-('use strict');
 export default () => {
   /**
    * 오늘 날짜랑 파라메터랑 diff
    * @param {*} data
    * @returns 양수면 true 음수면 false
    */
-  const dateDiff = (data: string): boolean => (new Date().getTime() > new Date(data).getTime() ? true : false);
+  const dateDiff = (data: string): boolean => new Date().getTime() > new Date(data).getTime();
 
   /**
    * 날짜 포맷
