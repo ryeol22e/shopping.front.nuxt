@@ -66,7 +66,7 @@
   const mypageIsShow = ref(false);
   const headers = computed((): any => storeCommon.getHeaders);
 
-  const logout = async () => {
+  const logout = async (): Promise<void> => {
     await storeMember.logoutProcess();
     reloadNuxtApp({ path: '/', force: true });
   };
