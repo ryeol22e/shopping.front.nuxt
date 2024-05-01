@@ -1,7 +1,10 @@
-import { utilsCommon } from '~/utils/utilsCommon';
-import { utilsRender } from '~/utils/utilsRender';
-
-export default () => ({
-  ...utilsCommon(),
-  ...utilsRender(),
+export const useUtils = () => ({
+  isEmpty,
+  noImage,
+  windowPosition,
+  scrollHandler,
+  unEscapeString,
+  appendZero,
+  insertComma,
+  hasObjectProperty,
 });
