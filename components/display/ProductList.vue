@@ -14,7 +14,7 @@
 
               <div class="card-body">
                 <h5 class="text-black">{{ item.prdtName }}</h5>
-                <p class="card-text text-black">판매가 : {{ numberComma(item.sellPrice) }}원</p>
+                <p class="card-text text-black">판매가 : {{ insertComma(item.sellPrice) }}원</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <!-- <div class="btn-group">
 										<button type="button" class="btn btn-sm btn-outline-secondary">View</button>
@@ -34,9 +34,9 @@
 </template>
 
 <script setup lang="ts">
-  import useUtils from '@/composables/useUtils';
+  import { useUtils } from '@/composables/useUtils';
 
-  const { isEmpty, numberComma } = useUtils();
+  const { isEmpty, insertComma } = useUtils();
   const storeProduct = useStoreProduct();
 
   const list = computed((): Array<any> => storeProduct.getList);
