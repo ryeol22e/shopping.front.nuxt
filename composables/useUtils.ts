@@ -6,5 +6,6 @@ export const useUtils = () => ({
   unEscapeString,
   appendZero,
   insertComma,
+  renderHTML,
   hasObjectProperty,
 });

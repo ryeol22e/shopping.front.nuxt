@@ -7,8 +7,8 @@ export const imagePreview = (input: HTMLInputElement, targetId: string): void =>
   const files = input.files;
   const reader = new FileReader();
 
-  if (files !== undefined && files !== null) {
-    reader.onload = function (e) {
+  if (!isEmpty(files)) {
+    reader.onload = (e): void => {
       (document.getElementById(targetId) as HTMLImageElement).src = (e.target as FileReader).result as string;
     };
 

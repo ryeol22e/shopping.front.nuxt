@@ -3,7 +3,7 @@
  * @param data
  * @returns
  */
-export const isEmpty = (data: any): boolean => {
+export const isEmpty = (data: any): data is any => {
   let bool = true;
 
   if (data !== undefined && data !== null) {
@@ -34,6 +34,9 @@ export const isEmpty = (data: any): boolean => {
         bool = false;
         break;
       case Boolean:
+        bool = false;
+        break;
+      default:
         bool = false;
         break;
     }

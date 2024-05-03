@@ -17,7 +17,7 @@ export const appendZero = (data: string | number): string => (Number(data) < 10 
  * @param value
  * @returns
  */
-export const insertComma = (value: number | null | undefined): string => (!isEmpty(value) ? value?.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',') ?? '0' : '0');
+export const insertComma = (value: number | null | undefined): string => (!isEmpty(value) ? String(value).replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',') ?? '0' : '0');
 
 /**
  * 날짜 DIFF
