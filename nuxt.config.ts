@@ -32,7 +32,7 @@ export default () => {
       middleware: 'middlewares',
     },
     vue: {
-      runtimeCompiler: profile === 'local' ? true : false,
+      runtimeCompiler: profile === 'local',
     },
     quasar: {
       plugins: [],
