@@ -7,10 +7,10 @@ export const useStoreProduct = defineStore('useStoreProduct', () => {
   const cateList = ref([]);
   const saveProductResult = ref(false);
 
-  const getList = computed(() => list.value);
-  const getDetail = computed(() => detail.value);
-  const getCateList = computed(() => cateList.value);
-  const getPrdtResult = computed(() => saveProductResult.value);
+  const getList = computed<Array<any>>(() => list.value);
+  const getDetail = computed<any>(() => detail.value);
+  const getCateList = computed<Array<any>>(() => cateList.value);
+  const getPrdtResult = computed<boolean>(() => saveProductResult.value);
 
   const setList = async (cateNo: string): Promise<void> => {
     await get('/display/product/list', {

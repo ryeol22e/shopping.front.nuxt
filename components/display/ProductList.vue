@@ -1,7 +1,7 @@
 <template>
   <div class="album py-5 bg-light">
     <div class="container">
-      <div v-if="!isEmpty(list)" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      <div v-if="!isEmpty(list as Array<any>)" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         <NuxtLink v-for="item in list" :key="item.prdtNo" :to="`/product/${item.prdtNo}`">
           <div class="col">
             <div class="card shadow-sm">
@@ -39,7 +39,7 @@
   const { isEmpty, insertComma } = useUtils();
   const storeProduct = useStoreProduct();
 
-  const list = computed((): Array<any> => storeProduct.getList);
+  const list = computed<Array<any>>(() => storeProduct.getList);
 </script>
 
 <style scoped>

@@ -4,7 +4,7 @@
  * @param targetId
  */
 export const imagePreview = (input: HTMLInputElement, targetId: string): void => {
-  const files = input.files;
+  const files = input.files as FileList;
   const reader = new FileReader();
 
   if (!isEmpty(files)) {
