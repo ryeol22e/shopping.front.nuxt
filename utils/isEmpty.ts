@@ -4,14 +4,14 @@
  * @param data
  * @returns
  */
-export const isEmpty = (data: any): data is any => {
+export const isEmpty = <T>(data: T): data is T => {
   let bool = true;
 
   if (data !== undefined && data !== null) {
     switch (data.constructor) {
       case String:
         {
-          const str = data.replace(/\s|\t|\n/gi, '');
+          const str = (data as string).replace(/\s|\t|\n/gi, '');
           if (str !== 'null' && str.length > 0) {
             bool = false;
           }
@@ -19,7 +19,7 @@ export const isEmpty = (data: any): data is any => {
 
         break;
       case Array:
-        if (data.length > 0) {
+        if ((data as Array<any>).length > 0) {
           bool = false;
         }
         break;
