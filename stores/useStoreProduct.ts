@@ -2,15 +2,10 @@ export const useStoreProduct = defineStore('useStoreProduct', () => {
   const { get, post } = useSetupFetch();
   const {} = useRunFetch();
 
-  const list = ref([]);
-  const detail = ref({});
-  const cateList = ref([]);
-  const saveProductResult = ref(false);
-
-  const getList = computed<Array<any>>(() => list.value);
-  const getDetail = computed<any>(() => detail.value);
-  const getCateList = computed<Array<any>>(() => cateList.value);
-  const getPrdtResult = computed<boolean>(() => saveProductResult.value);
+  const list = ref<Array<any>>([]);
+  const detail = ref<object>({});
+  const cateList = ref<Array<any>>([]);
+  const saveProductResult = ref<boolean>(false);
 
   const setList = async (cateNo: string): Promise<void> => {
     await get('/display/product/list', {
@@ -18,7 +13,10 @@ export const useStoreProduct = defineStore('useStoreProduct', () => {
       useYn: 'Y',
       dispYn: 'Y',
     })
-      .then((res: any) => (list.value = res.data))
+      .then((res: any) => {
+        console.log(res);
+        list.value = res.data;
+      })
       .catch((error) => console.log(error));
   };
   const setDetail = async (prdtNo: string): Promise<void> => {
@@ -39,10 +37,10 @@ export const useStoreProduct = defineStore('useStoreProduct', () => {
   };
 
   return {
-    getList,
-    getDetail,
-    getCateList,
-    getPrdtResult,
+    getList: computed(() => list.value),
+    getDetail: computed(() => detail.value),
+    getCateList: computed(() => cateList.value),
+    getPrdtResult: computed(() => saveProductResult.value),
     setList,
     setDetail,
     setCateList,

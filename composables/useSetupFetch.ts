@@ -13,7 +13,6 @@ export const useSetupFetch = () => {
         baseURL: config.public.baseApiUrl,
         method: 'get',
         watch: false,
-        lazy: process.client,
         server: process.server,
         query,
         headers: {
@@ -35,7 +34,6 @@ export const useSetupFetch = () => {
         baseURL: config.public.baseApiUrl,
         method: 'post',
         watch: false,
-        lazy: process.client,
         server: process.server,
         body,
         headers: {

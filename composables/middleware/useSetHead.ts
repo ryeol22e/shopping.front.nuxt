@@ -1,30 +1,34 @@
 export const useSetHead = (to: any) => {
-	const setHead = () => {
-		const pageName = to.name;
-		const head = {
-			title: '',
-			meta: [],
-			bodyAttrs: {
-				class: '',
-			},
-			// link: [{ rel: 'stylesheet', href: bootstrapCss, defer: true }],
-			script: [],
-		};
+  const setHead = () => {
+    const pageName = to.name;
 
-		switch (pageName) {
-			case 'index':
-				head.title = 'shoppingmall';
-				break;
-			default:
-				head.title = pageName;
-				break;
-		}
+    const head = {
+      title: '',
+      meta: [],
+      bodyAttrs: {
+        class: '',
+      },
+      // link: [{ rel: 'stylesheet', href: bootstrapCss, defer: true }],
+      script: [],
+    };
 
-		// import('bootstrap/dist/css/bootstrap.min.css');
-		useHead(head);
-	};
+    switch (pageName) {
+      case 'index':
+        head.title = 'shoppingmall';
+        break;
+      case 'product-prdtNo':
+        head.title = to.params.prdtNo;
+        break;
+      default:
+        head.title = pageName;
+        break;
+    }
 
-	return {
-		setHead,
-	};
+    // import('bootstrap/dist/css/bootstrap.min.css');
+    useHead(head);
+  };
+
+  return {
+    setHead,
+  };
 };

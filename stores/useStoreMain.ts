@@ -2,9 +2,7 @@ export const useStoreMain = defineStore('useStoreMain', () => {
   const { get } = useSetupFetch();
   const {} = useRunFetch();
 
-  const bannerList = ref([]);
-
-  const getBannerList = computed(() => bannerList.value);
+  const bannerList = ref<Array<any>>([]);
 
   const setBannerList = async (param: any): Promise<void> => {
     await get('/display/main/banner', param)
@@ -12,7 +10,7 @@ export const useStoreMain = defineStore('useStoreMain', () => {
       .catch((error) => console.log(error));
   };
   return {
-    getBannerList,
+    getBannerList: computed(() => bannerList.value),
     setBannerList,
   };
 });

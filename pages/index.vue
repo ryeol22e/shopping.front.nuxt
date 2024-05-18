@@ -1,7 +1,7 @@
 <template>
   <QPage>
     <QCarousel v-if="!isEmpty(bannerList as Array<any>)" arrows animated infinite v-model="slide" :autoplay="true" transition-prev="slide-right" transition-next="slide-left">
-      <QCarouselSlide v-for="(item, index) in bannerList" :key="index" :name="index" :img-src="`data:image/png;base64,${item.image}`">
+      <QCarouselSlide v-for="(item, index) of bannerList" :key="index" :name="index" :img-src="`${item.imagePath}/${item.imageName}`">
         <div class="absolute-bottom custom-caption">
           <div class="text-h2">{{ item.title }}</div>
           <div class="text-subtitle1">{{ item.description }}</div>
@@ -10,8 +10,8 @@
     </QCarousel>
 
     <div class="q-pa-md row items-start q-gutter-md">
-      <QCard v-for="index in 10" :key="index" class="my-card">
-        <img alt="img" src="https://cdn.quasar.dev/img/mountains.jpg" />
+      <QCard v-for="index of 10" :key="index" class="my-card">
+        <img src="https://cdn.quasar.dev/img/mountains.jpg" alt="img" />
 
         <QCardSection>
           <div class="text-h6">Our Changing Planet</div>

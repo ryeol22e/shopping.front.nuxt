@@ -1,10 +1,12 @@
+import noImageFile from '~/assets/images/no-image.jpg';
+
 /**
  * no image 처리
  * noImage($event)
  * @param {*} e
  */
 export const noImage = (e: Event): void => {
-  (e.target as HTMLImageElement).src = '/images/common/no_image.png';
+  (e.target as HTMLImageElement).src = noImageFile;
 };
 
 /**

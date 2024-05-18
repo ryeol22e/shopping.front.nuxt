@@ -7,7 +7,7 @@ export const imagePreview = (input: HTMLInputElement, targetId: string): void =>
   const files = input.files as FileList;
   const reader = new FileReader();
 
-  if (!isEmpty(files)) {
+  if (!isEmpty(files as FileList)) {
     reader.onload = (e): void => {
       (document.getElementById(targetId) as HTMLImageElement).src = (e.target as FileReader).result as string;
     };

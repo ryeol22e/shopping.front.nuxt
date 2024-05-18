@@ -1,23 +1,17 @@
 <template>
-  <section class="py-5 text-center container">
-    <div class="row py-lg-5">
-      <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-light">{{ title }}</h1>
-        <p class="lead text-muted">{{ desc }}</p>
-      </div>
-    </div>
+  <section class="q-pa-md absolute-center">
+    <h1>{{ title }}</h1>
+    <p>{{ desc }}</p>
   </section>
 </template>
 
 <script setup lang="ts">
-  const props = defineProps({
-    title: {
-      type: String,
-      default: '',
-    },
-    desc: {
-      type: String,
-      default: '',
-    },
+  interface DisplayHeader {
+    title?: string;
+    desc?: string;
+  }
+  const props = withDefaults(defineProps<DisplayHeader>(), {
+    title: '',
+    desc: '',
   });
 </script>

@@ -5,36 +5,36 @@
 					<img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg" />
 				</q-avatar> -->
 
-      <RouterLink to="/" class="text-white">
+      <NuxtLink to="/" class="text-white">
         <QToolbarTitle>SHOP</QToolbarTitle>
-      </RouterLink>
+      </NuxtLink>
       <!-- <q-btn v-if="isMobile" flat round dense icon="menu" class="q-mr-sm" /> -->
     </QToolbar>
     <QToolbar insert>
       <QBreadcrumbs active-color="primary" style="font-size: 16px">
-        <RouterLink class="text-white" v-for="header in headers" :key="header.codeId" :to="{ path: header.addInfo2 }">
+        <NuxtLink class="text-white" v-if="!isEmpty(headers as Array<any>)" v-for="header of headers" :key="header.codeId" :to="{ path: header.addInfo2 }">
           <QBreadcrumbsEl :label="header.codeName" />
-        </RouterLink>
-        <RouterLink v-if="userRole === MEMBER_CONST.VIP || userRole === MEMBER_CONST.ADMIN" to="/display/vip" class="text-white">
+        </NuxtLink>
+        <NuxtLink v-if="userRole === MEMBER_CONST.VIP || userRole === MEMBER_CONST.ADMIN" to="/display/vip" class="text-white">
           <QBreadcrumbsEl label="VIP" />
-        </RouterLink>
+        </NuxtLink>
 
         <div class="absolute-right">
-          <RouterLink v-if="!isLogin" to="/login" class="text-white">
+          <NuxtLink v-if="!isLogin" to="/login" class="text-white">
             <QBreadcrumbsEl label="Login" />
-          </RouterLink>
+          </NuxtLink>
           <a v-else @click="mypageOpen" href="javascript:void(0);" class="text-white" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">Mypage</a>
 
           <a class="text-white">·</a>
 
-          <RouterLink v-if="!isLogin" to="/signup" class="text-white">
+          <NuxtLink v-if="!isLogin" to="/signup" class="text-white">
             <QBreadcrumbsEl label="Sign-up" />
-          </RouterLink>
+          </NuxtLink>
           <template v-else>
             <template v-if="userRole === MEMBER_CONST.ADMIN">
-              <RouterLink to="/admin/dashboard" class="text-white">
+              <NuxtLink to="/admin/dashboard" class="text-white">
                 <QBreadcrumbsEl label="admin" />
-              </RouterLink>
+              </NuxtLink>
 
               <a class="text-white">·</a>
             </template>
@@ -50,13 +50,6 @@
 </template>
 
 <script setup lang="ts">
-  import useEnum from '@/composables/useEnum';
-  import useLoginManager from '@/composables/useLoginManager';
-
-  import { useStoreCommon } from '@/stores/useStoreCommon';
-  import { useStoreMember } from '@/stores/useStoreMember';
-  import { computed, ref } from 'vue';
-
   const { isLogin, userRole } = useLoginManager();
   const { MEMBER_CONST } = useEnum();
 
@@ -64,7 +57,7 @@
   const storeMember = useStoreMember();
 
   const mypageIsShow = ref(false);
-  const headers = computed((): any => storeCommon.getHeaders);
+  const headers = computed<Array<any>>(() => storeCommon.getHeaders);
 
   const logout = async (): Promise<void> => {
     await storeMember.logoutProcess();
