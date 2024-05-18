@@ -1,8 +1,8 @@
 <template>
   <div class="album py-5 bg-light">
     <div class="container">
-      <div v-if="!isEmpty(list)" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        <NuxtLink v-for="item in (list as any[])" :key="item.prdtNo" :to="`/product/${item.prdtNo}`">
+      <div v-if="!isEmpty(list as Array<any>)" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <NuxtLink v-for="item of list" :key="item.prdtNo" :to="`/product/${item.prdtNo}`">
           <div class="col">
             <div class="card shadow-sm">
               <img v-if="!isEmpty(item.image)" :src="`data:image/png;base64,${item.image}`" alt="" height="225" />
@@ -34,8 +34,6 @@
 </template>
 
 <script setup lang="ts">
-  import { useUtils } from '@/composables/useUtils';
-
   const { isEmpty, insertComma } = useUtils();
   const storeProduct = useStoreProduct();
 
