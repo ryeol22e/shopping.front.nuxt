@@ -1,5 +1,3 @@
-import type { MetaObject } from 'nuxt/schema';
-
 export {};
 
 declare global {
