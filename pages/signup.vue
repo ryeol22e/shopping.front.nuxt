@@ -1,7 +1,8 @@
 <template>
-  <QPage>
-    <div class="q-pa-md absolute-center">
+  <QPage class="absolute absolute-center">
+    <div class="q-pa-md">
       <h1>sign up</h1>
+
       <div class="row q-col-qutter-5">
         <div class="colum">
           <div class="col">
@@ -23,11 +24,11 @@
           <div class="col-10">
             <div class="row">
               <QInput v-model="data.authNumber" type="text" hint="인증번호" />
-              <QBtn color="black" label="인증번호 받기" @click="getAuthNumber" />
+              <QBtn color="black" label="인증번호 받기" @click="getAuthNumber" class="glossy" />
             </div>
           </div>
 
-          <div class="col">
+          <div class="col-10 fixed-bottom-right">
             <QBtn color="primary" label="Sign up" @click="signUp" />
           </div>
         </div>

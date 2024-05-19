@@ -12,9 +12,9 @@
       <QCardSection>
         <QBtn style="border-radius: 8px" color="dark" rounded size="md" label="Sign in" no-caps class="full-width" @click="loginProcess"></QBtn>
       </QCardSection>
-      <!-- <QCardSection class="text-center q-pt-none">
-          <div class="text-grey-8">Don't have an account yet? <a href="#" class="text-dark text-weight-bold" style="text-decoration: none">Sign up.</a></div>
-        </QCardSection> -->
+      <QCardSection class="text-center q-pt-none">
+        <div class="text-grey-8">Don't have an account yet? <NuxtLink to="/signup" class="text-dark text-weight-bold" style="text-decoration: none">Sign up.</NuxtLink></div>
+      </QCardSection>
     </QCard>
   </QPage>
 </template>
