@@ -1,6 +1,10 @@
 <template>
-  <QPage>
-    <h1>{{ prdtNo }}</h1>
+  <QPage class="absolute-center">
+    <h1>{{ detail.prdtName }}</h1>
+    <p>{{ prdtNo }}</p>
+    <div>
+      <span>판매가 : {{ insertComma(detail.sellPrice) }}원</span>
+    </div>
   </QPage>
 </template>
 
@@ -9,7 +13,11 @@
   import { useRoute } from 'vue-router';
 
   const route = useRoute();
-  const prdtNo = ref(route.params.prdtNo);
+  const storeProduct = useStoreProduct();
+  const prdtNo = ref<string>(route.params.prdtNo as string);
+  const detail = computed(() => storeProduct.getDetail);
 
   onMounted(() => {});
+
+  await storeProduct.setDetail(prdtNo.value);
 </script>

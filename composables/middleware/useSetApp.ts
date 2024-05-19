@@ -1,14 +1,14 @@
 export const useSetApp = (to: any) => ({
-	setApp() {
-		const nuxtApp = useNuxtApp();
-		const storeVar = useStoreVariable();
+  setApp() {
+    const nuxtApp = useNuxtApp();
+    const storeVar = useStoreVariable();
 
-		nuxtApp.hook('app:created', () => {});
-		nuxtApp.hook('app:rendered', () => {});
-		nuxtApp.hook('app:beforeMount', () => {});
-		nuxtApp.hook('app:mounted', () => {});
+    nuxtApp.hook('app:created', () => {});
+    nuxtApp.hook('app:rendered', () => {});
+    nuxtApp.hook('app:beforeMount', () => {});
+    nuxtApp.hook('app:mounted', () => {});
 
-		nuxtApp.hook('page:start', () => {});
-		nuxtApp.hook('page:finish', () => {});
-	},
+    nuxtApp.hook('page:start', () => {});
+    nuxtApp.hook('page:finish', () => {});
+  },
 });

@@ -4,14 +4,12 @@
 </template>
 
 <script setup lang="ts">
-  const props = defineProps({
-    title: {
-      type: String,
-      default: '',
-    },
-    desc: {
-      type: String,
-      default: '',
-    },
+  interface DisplayHeader {
+    title?: string;
+    desc?: string;
+  }
+  const props = withDefaults(defineProps<DisplayHeader>(), {
+    title: '',
+    desc: '',
   });
 </script>

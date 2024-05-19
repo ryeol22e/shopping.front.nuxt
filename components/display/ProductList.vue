@@ -1,18 +1,20 @@
 <template>
-  <div v-if="!isEmpty(list as Array<any>)" class="q-pa-md row items-start q-gutter-md">
-    <NuxtLink v-for="item of list" :key="item.prdtNo" :to="`/product/${item.prdtNo}`">
-      <QCard class="my-card">
-        <img :src="`${item.imagePath}/${item.imageName}`" :alt="item.prdtName" @error="noImage($event as Event)" />
+  <ClientOnly>
+    <div v-if="!isEmpty(list as Array<any>)" class="row items-start q-gutter-md">
+      <NuxtLink v-for="item of list" :key="item.prdtNo" :to="`/product/${item.prdtNo}`">
+        <QCard class="my-card">
+          <img :src="`${item.imagePath}/${item.imageName}`" :alt="item.prdtName" @error="noImage($event as Event)" />
 
-        <QCardSection>
-          <div class="text-h6">{{ item.prdtName }}</div>
-          <div class="text-subtitle2">판매가 : {{ insertComma(item.sellPrice) }}</div>
-        </QCardSection>
+          <QCardSection>
+            <div class="text-h6">{{ item.prdtName }}</div>
+            <div class="text-subtitle2">판매가 : {{ insertComma(item.sellPrice) }}</div>
+          </QCardSection>
 
-        <QCardSection class="q-pt-none"> 구입하기 </QCardSection>
-      </QCard>
-    </NuxtLink>
-  </div>
+          <QCardSection class="q-pt-none"> 구입하기 </QCardSection>
+        </QCard>
+      </NuxtLink>
+    </div>
+  </ClientOnly>
 </template>
 
 <script setup lang="ts">
@@ -25,6 +27,7 @@
 <style lang="scss" scoped>
   a {
     text-decoration: none;
+    color: black;
   }
 
   .my-card {

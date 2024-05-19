@@ -1,5 +1,5 @@
 <template>
-  <section class="q-pa-md absolute-center">
+  <section>
     <h1>{{ title }}</h1>
     <p>{{ desc }}</p>
   </section>

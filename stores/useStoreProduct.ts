@@ -3,7 +3,7 @@ export const useStoreProduct = defineStore('useStoreProduct', () => {
   const {} = useRunFetch();
 
   const list = ref<Array<any>>([]);
-  const detail = ref<object>({});
+  const detail = ref<AnyObject>({});
   const cateList = ref<Array<any>>([]);
   const saveProductResult = ref<boolean>(false);
 

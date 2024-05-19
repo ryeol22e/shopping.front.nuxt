@@ -6,6 +6,7 @@ import noImageFile from '~/assets/images/no-image.jpg';
  * @param {*} e
  */
 export const noImage = (e: Event): void => {
+  console.log(e.target);
   (e.target as HTMLImageElement).src = noImageFile;
 };
 
