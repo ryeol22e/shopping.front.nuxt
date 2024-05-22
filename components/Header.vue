@@ -5,7 +5,7 @@
 					<img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg" />
 				</q-avatar> -->
 
-      <NuxtLink to="/" class="text-white">
+      <NuxtLink to="/" class="text-white" external>
         <QToolbarTitle>SHOP</QToolbarTitle>
       </NuxtLink>
       <!-- <q-btn v-if="isMobile" flat round dense icon="menu" class="q-mr-sm" /> -->
