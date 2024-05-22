@@ -37,10 +37,7 @@
   </QPage>
 </template>
 
-<script lang="ts" setup>
-  import { reactive } from 'vue';
-  import { usePageLink } from '@/composables/usePageLink';
-
+<script setup lang="ts">
   const { movePage } = usePageLink();
   const { appSession } = useStorage();
   const { getItem, setItem, removeItem } = appSession();

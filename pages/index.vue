@@ -24,7 +24,7 @@
   </QPage>
 </template>
 
-<script lang="ts" setup>
+<script setup lang="ts">
   const { isEmpty } = useUtils();
   const slide = ref(0);
   const storeMain = useStoreMain();

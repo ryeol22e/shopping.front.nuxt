@@ -66,6 +66,6 @@
   });
   onMounted(() => {
     data.memberId = isEmpty(getItem('memberId')) ? '' : getItem('memberId');
-    remember.value = isEmpty(data.memberId) ? false : true;
+    remember.value = isEmpty(data.memberId);
   });
 </script>

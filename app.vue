@@ -3,7 +3,7 @@
     <NuxtLoadingIndicator color="green" />
 
     <QPageContainer>
-      <NuxtPage :pageKey="(route) => route.fullPath" />
+      <NuxtPage :page-key="(route) => route.fullPath" />
     </QPageContainer>
   </NuxtLayout>
 </template>
