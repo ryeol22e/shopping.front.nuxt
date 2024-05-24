@@ -1,20 +1,18 @@
 <template>
-  <ClientOnly>
-    <div v-if="!isEmpty(list as Array<any>)" class="row items-start q-gutter-md">
-      <NuxtLink v-for="item of list" :key="item.prdtNo" :to="`/product/${item.prdtNo}`">
-        <QCard class="my-card">
-          <img :src="`${item.imagePath}/${item.imageName}`" :alt="item.prdtName" @error="noImage($event as Event)" />
+  <div v-if="!isEmpty(list as Array<any>)" class="row items-start q-gutter-md">
+    <NuxtLink v-for="item of list" :key="item.prdtNo" :to="`/product/${item.prdtNo}`">
+      <QCard class="my-card">
+        <Image :src="`${item.imagePath}/${item.imageName}`" :alt="item.prdtName" />
 
-          <QCardSection>
-            <div class="text-h6">{{ item.prdtName }}</div>
-            <div class="text-subtitle2">판매가 : {{ insertComma(item.sellPrice) }}</div>
-          </QCardSection>
+        <QCardSection>
+          <div class="text-h6">{{ item.prdtName }}</div>
+          <div class="text-subtitle2">판매가 : {{ insertComma(item.sellPrice) }}</div>
+        </QCardSection>
 
-          <QCardSection class="q-pt-none"> 구입하기 </QCardSection>
-        </QCard>
-      </NuxtLink>
-    </div>
-  </ClientOnly>
+        <QCardSection class="q-pt-none"> 구입하기 </QCardSection>
+      </QCard>
+    </NuxtLink>
+  </div>
 </template>
 
 <script setup lang="ts">

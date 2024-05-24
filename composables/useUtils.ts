@@ -1,6 +1,6 @@
 export const useUtils = () => ({
   isEmpty,
-  noImage,
+  noImageHandler,
   windowPosition,
   scrollHandler,
   unEscapeString,

@@ -14,7 +14,6 @@ export const useStoreProduct = defineStore('useStoreProduct', () => {
       dispYn: 'Y',
     })
       .then((res: any) => {
-        console.log(res);
         list.value = res.data;
       })
       .catch((error) => console.log(error));

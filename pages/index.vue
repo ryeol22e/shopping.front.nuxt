@@ -11,7 +11,7 @@
 
     <div class="q-pa-md row items-start q-gutter-md">
       <QCard v-for="index of 10" :key="index" class="my-card">
-        <img src="https://cdn.quasar.dev/img/mountains.jpg" alt="img" />
+        <Image src="https://cdn.quasar.dev/img/mountains.jpg" alt="img" />
 
         <QCardSection>
           <div class="text-h6">Our Changing Planet</div>

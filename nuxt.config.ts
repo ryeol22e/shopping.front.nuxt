@@ -50,6 +50,9 @@ export default () => {
     css: [],
     logLevel: 'info',
     routeRules: {
+      '/': {
+        prerender: true,
+      },
       '/api/**': {
         ssr: true,
         cors: true,
@@ -69,12 +72,16 @@ export default () => {
         noscript: [],
       },
     },
-    components: {
-      dirs: [resolve('./components'), '~/components', '@/components'],
-    },
+    components: [
+      {
+        global: true,
+        path: '~/components',
+        pathPrefix: false,
+      },
+    ],
     imports: {
       autoImport: true,
-      dirs: [resolve('./stores'), '~/stores', '@/stores', resolve('./composables'), '~/composables', '@/composables'],
+      dirs: [resolve('./stores'), '~/stores', resolve('./composables'), '~/composables', resolve('./components'), '~/components'],
     },
     devServer: {
       https: true,

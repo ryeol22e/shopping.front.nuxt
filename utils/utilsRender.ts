@@ -1,13 +1,12 @@
-import noImageFile from '~/assets/images/no-image.jpg';
+import noImageUrl from '~/assets/images/no-image.jpg';
 
 /**
  * no image 처리
  * noImage($event)
  * @param {*} e
  */
-export const noImage = (e: Event): void => {
-  console.log(e.target);
-  (e.target as HTMLImageElement).src = noImageFile;
+export const noImageHandler = (e: Event): void => {
+  (e.target as HTMLImageElement).src = noImageUrl;
 };
 
 /**
