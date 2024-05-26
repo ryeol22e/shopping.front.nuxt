@@ -1,6 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
-// import fs from 'node:fs';
 import { createResolver } from '@nuxt/kit';
 
 const { resolve } = createResolver(import.meta.url);
