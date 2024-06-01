@@ -1,14 +1,3 @@
-import noImageUrl from '~/assets/images/no-image.jpg';
-
-/**
- * no image 처리
- * noImage($event)
- * @param {*} e
- */
-export const noImageHandler = (e: Event): void => {
-  (e.target as HTMLImageElement).src = noImageUrl;
-};
-
 /**
  * 화면 위치지정
  * useWindowPosition(object)
