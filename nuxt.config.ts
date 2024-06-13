@@ -5,9 +5,9 @@ import { createResolver } from '@nuxt/kit';
 const { resolve } = createResolver(import.meta.url);
 
 export default () => {
-  const API_BASE_URL: string = `${<string>process.env.NUXT_API_BASE_URL}/api/**`;
-  const profile: string = <string>process.env.NUXT_PROFILE_ACTIVE;
-  const port: string = <string>process.env.PORT;
+  const API_BASE_URL = `${<string>process.env.NUXT_API_BASE_URL}/api/**`;
+  const profile = <string>process.env.NUXT_PROFILE_ACTIVE;
+  const port = <string>process.env.PORT;
 
   return defineNuxtConfig({
     ssr: true,
