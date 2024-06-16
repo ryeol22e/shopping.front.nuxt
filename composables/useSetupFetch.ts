@@ -8,12 +8,12 @@ export const useSetupFetch = () => {
   const combineURL = (path: string): string => (path.startsWith('/') ? path : '/'.concat(path));
 
   return {
-    async get(path: string, query: any = {}, headers: any = {}): Promise<AnyObject> {
-      const { pending, status, data, error } = await useFetch(combineURL(path), {
+    async setupGet(path: string, query: any = {}, headers: any = {}): Promise<AnyObject> {
+      const { status, data, error } = await useFetch(combineURL(path), {
         baseURL: config.public.baseApiUrl,
         method: 'get',
         watch: false,
-        server: process.server,
+        server: import.meta.server,
         query,
         headers: {
           ...headers,
@@ -23,18 +23,18 @@ export const useSetupFetch = () => {
 
       return new Promise((resolve, reject) => {
         if (status.value !== 'error') {
-          resolve({ pending: pending.value, status: status.value, data: data.value });
+          resolve({ status: status.value, data: data.value });
         } else {
           reject(error.value);
         }
       });
     },
-    async post(path: string, body: any = {}, headers: any = {}): Promise<AnyObject> {
-      const { pending, status, data, error } = await useFetch(combineURL(path), {
+    async setupPost(path: string, body: any = {}, headers: any = {}): Promise<AnyObject> {
+      const { status, data, error } = await useFetch(combineURL(path), {
         baseURL: config.public.baseApiUrl,
         method: 'post',
         watch: false,
-        server: process.server,
+        server: import.meta.server,
         body,
         headers: {
           ...headers,
@@ -44,7 +44,7 @@ export const useSetupFetch = () => {
 
       return new Promise((resolve, reject) => {
         if (status.value !== 'error') {
-          resolve({ pending: pending.value, status: status.value, data: data.value });
+          resolve({ status: status.value, data: data.value });
         } else {
           reject(error.value);
         }

@@ -2,8 +2,8 @@ import useEnum from '@/composables/useEnum';
 
 export const useStoreMember = defineStore('useStoreMember', () => {
   const { MEMBER_CONST } = useEnum();
-  const { get, post } = useSetupFetch();
-  const {} = useRunFetch();
+  const { setupGet } = useSetupFetch();
+  const { runGet, runPost } = useRunFetch();
 
   const boolLogin = ref(false);
   const boolInfoSet = ref(false);
@@ -25,19 +25,19 @@ export const useStoreMember = defineStore('useStoreMember', () => {
     boolLogin.value = bool;
   };
   const authCheck = async (): Promise<void> => {
-    await get('/member/auth')
+    await setupGet('/member/auth')
       .then((res: any) => (boolLogin.value = JSON.parse(res.data)))
       .catch((error) => console.log(error));
   };
   const loginProcess = async (param: MemberInfo): Promise<void> => {
-    await post('/member/login', param)
+    await runPost('/member/login', param)
       .then((res: any) => {
-        boolLogin.value = JSON.parse(res.data);
+        boolLogin.value = JSON.parse(res);
       })
       .catch((error) => console.log(error));
   };
   const setMemberInfo = async (): Promise<void> => {
-    await get('/member/info')
+    await setupGet('/member/info')
       .then((res: any) => {
         userInfo.value = res.data;
       })
@@ -47,15 +47,15 @@ export const useStoreMember = defineStore('useStoreMember', () => {
       .catch((error) => console.log(error));
   };
   const logoutProcess = async (): Promise<void> => {
-    await get('/member/logout').catch((error) => console.log(error));
+    await runGet('/member/logout').catch((error) => console.log(error));
   };
   const signUpProcess = async (param: any): Promise<void> => {
-    await post('/member/join', param)
+    await runPost('/member/join', param)
       .then((res: any) => (signUpResult.value = res.data))
       .catch((error) => console.log(error));
   };
   const setAuthNumber = async (param: any): Promise<void> => {
-    await post('/member/auth/number', param)
+    await runPost('/member/auth/number', param)
       .then((res: any) => (authNumber.value = String(res.data).substring(0, res.data.lastIndexOf('.'))))
       .catch((error) => console.log(error));
   };

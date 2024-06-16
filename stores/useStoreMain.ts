@@ -1,11 +1,10 @@
 export const useStoreMain = defineStore('useStoreMain', () => {
-  const { get } = useSetupFetch();
-  const {} = useRunFetch();
+  const { setupGet } = useSetupFetch();
 
   const bannerList = ref<Array<any>>([]);
 
   const setBannerList = async (param: any): Promise<void> => {
-    await get('/display/main/banner', param)
+    await setupGet('/display/main/banner', param)
       .then((res: any) => (bannerList.value = res.data))
       .catch((error) => console.log(error));
   };

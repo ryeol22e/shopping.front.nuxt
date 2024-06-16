@@ -1,6 +1,6 @@
 export const useStoreProduct = defineStore('useStoreProduct', () => {
-  const { get, post } = useSetupFetch();
-  const {} = useRunFetch();
+  const { setupGet } = useSetupFetch();
+  const { runPost } = useRunFetch();
 
   const list = ref<Array<any>>([]);
   const detail = ref<AnyObject>({});
@@ -8,7 +8,7 @@ export const useStoreProduct = defineStore('useStoreProduct', () => {
   const saveProductResult = ref<boolean>(false);
 
   const setList = async (cateNo: string): Promise<void> => {
-    await get('/display/product/list', {
+    await setupGet('/display/product/list', {
       cateNo: cateNo,
       useYn: 'Y',
       dispYn: 'Y',
@@ -19,18 +19,18 @@ export const useStoreProduct = defineStore('useStoreProduct', () => {
       .catch((error) => console.log(error));
   };
   const setDetail = async (prdtNo: string): Promise<void> => {
-    await get(`/product/${prdtNo}`)
+    await setupGet(`/product/${prdtNo}`)
       .then((res: any) => (detail.value = res.data))
       .catch((error) => console.log(error));
   };
   const setCateList = async (param: any): Promise<void> => {
-    await get(`/cate/list`, param)
+    await setupGet(`/cate/list`, param)
       .then((res: any) => (cateList.value = res.data))
       .catch((error) => console.log(error));
   };
   const setProductData = async (param: FormData): Promise<void> => {
     const prdtNo = param.get('prdtNo');
-    await post(`/product/${prdtNo}`, param)
+    await runPost(`/product/${prdtNo}`, param)
       .then((res: any) => (saveProductResult.value = res.data || false))
       .catch((error) => console.log(error));
   };

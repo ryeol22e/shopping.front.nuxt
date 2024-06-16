@@ -1,6 +1,6 @@
 export const useStoreVariable = defineStore('useStoreVariable', () => {
-  const { get } = useSetupFetch();
-  const {} = useRunFetch();
+  const { setupGet } = useSetupFetch();
+  const { runGet } = useRunFetch();
 
   const boolLoading = ref(false);
 
