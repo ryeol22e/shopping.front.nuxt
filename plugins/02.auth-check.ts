@@ -1,6 +1,6 @@
 export default defineNuxtPlugin({
   name: 'auth-check',
-  enforce: process.server ? 'pre' : 'post',
+  enforce: import.meta.server ? 'pre' : 'post',
   async setup() {
     await useStoreMember().authCheck();
   },

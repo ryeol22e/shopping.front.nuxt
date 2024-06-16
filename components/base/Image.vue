@@ -8,7 +8,7 @@
   interface Attribute {
     src: string;
     alt: string;
-    loading: 'eager' | 'lazy' | undefined;
+    loading?: 'eager' | 'lazy' | undefined;
   }
 
   const props = withDefaults(defineProps<Attribute>(), {
