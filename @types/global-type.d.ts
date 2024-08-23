@@ -1,5 +1,5 @@
 export declare type KeyObject = {
-  [key: string | number]: any;
+  [key: string | number];
 };
 export declare type SEOMetaObject = {
   title?: MaybeComputedRefOrPromise;
