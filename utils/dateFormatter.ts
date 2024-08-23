@@ -1,15 +1,4 @@
-interface DateType {
-  year: number;
-  month: number;
-  day: number;
-  hour: number;
-  min: number;
-  sec: number;
-}
-interface DatePattern {
-  datePattern: string;
-  timePattern: string;
-}
+import type { DatePattern, DateType } from '~/@types/utils-type';
 
 /**
  * 날짜 년,월,일 시,분,초 나눈함수

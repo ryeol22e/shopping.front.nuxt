@@ -3,13 +3,8 @@
 </template>
 
 <script setup lang="ts">
+  import type { Attribute } from '~/@types/components-type';
   import noImageUrl from '~/assets/images/no-image.jpg';
-
-  interface Attribute {
-    src: string;
-    alt: string;
-    loading?: 'eager' | 'lazy' | undefined;
-  }
 
   const props = withDefaults(defineProps<Attribute>(), {
     src: '',

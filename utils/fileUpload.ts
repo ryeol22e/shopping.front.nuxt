@@ -1,3 +1,5 @@
+import type { KeyObject } from '~/@types/global-type';
+
 /**
  * file upload function
  * @param {*} url
@@ -6,7 +8,7 @@
  */
 export const fileUpload = (url: string, isRender: boolean = false, renderTarget: string = ''): object => {
   const sendServerUrl = url;
-  const fileObject: AnyObject = {};
+  const fileObject: KeyObject = {};
   let dropZone = document.getElementById('dropBox') as HTMLElement;
   let uploadBtn = document.getElementById('uploadBtn') as HTMLButtonElement;
   let deleteBtn = document.getElementById('deleteBtn') as HTMLButtonElement;
@@ -84,10 +86,10 @@ export const fileUpload = (url: string, isRender: boolean = false, renderTarget:
     e.target.value = null;
   };
   const deleteFile = () => {
-    const checkedList: AnyObject = [...document.getElementsByName('fileCheckBox')].filter((item: any) => item.checked);
+    const checkedList: Array<HTMLElement> = [...document.getElementsByName('fileCheckBox')].filter((item: any) => item.checked);
 
     for (let i = 0, size = checkedList.length; i < size; i++) {
-      const lastModified = checkedList[i].value;
+      const lastModified = (checkedList[i] as HTMLInputElement).value;
 
       if (Object.hasOwn(fileObject, lastModified)) {
         fileObject[lastModified] = undefined;

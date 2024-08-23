@@ -1,9 +1,11 @@
+import type { KeyObject } from '~/@types/global-type';
+
 export const useStoreProduct = defineStore('useStoreProduct', () => {
   const { setupGet } = useSetupFetch();
   const { runPost } = useRunFetch();
 
   const list = ref<Array<any>>([]);
-  const detail = ref<AnyObject>({});
+  const detail = ref<KeyObject>({});
   const cateList = ref<Array<any>>([]);
   const saveProductResult = ref<boolean>(false);
 

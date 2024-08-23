@@ -1,3 +1,5 @@
+import type { KeyObject } from '~/@types/global-type';
+
 /**
  * 화면 위치지정
  * useWindowPosition(object)
@@ -15,7 +17,8 @@ export const windowPosition = (data: object): void => {
  * object change form data
  * @param {*} data
  */
-export const changeToFormData = (data: AnyObject): FormData => {
+export const changeToFormData = (data: KeyObject): FormData => {
+  File;
   const form = new FormData();
   const keyList = Object.keys(data);
 

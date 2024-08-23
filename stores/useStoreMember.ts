@@ -1,4 +1,5 @@
-import useEnum from '@/composables/useEnum';
+import useEnum from '~/composables/useEnum';
+import type { MemberInfo } from '~/@types/member-type';
 
 export const useStoreMember = defineStore('useStoreMember', () => {
   const { MEMBER_CONST } = useEnum();
