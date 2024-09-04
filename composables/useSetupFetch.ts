@@ -1,3 +1,5 @@
+import type { KeyObject } from '~/@types/global-type';
+
 /**
  * created될때 사용하는 fetch
  * @returns
@@ -8,7 +10,7 @@ export const useSetupFetch = () => {
   const combineURL = (path: string): string => (path.startsWith('/') ? path : '/'.concat(path));
 
   return {
-    async setupGet(path: string, query: any = {}, headers: any = {}): Promise<AnyObject> {
+    async setupGet(path: string, query: any = {}, headers: any = {}): Promise<KeyObject> {
       const { status, data, error } = await useFetch(combineURL(path), {
         baseURL: config.public.baseApiUrl,
         method: 'get',
@@ -29,7 +31,7 @@ export const useSetupFetch = () => {
         }
       });
     },
-    async setupPost(path: string, body: any = {}, headers: any = {}): Promise<AnyObject> {
+    async setupPost(path: string, body: any = {}, headers: any = {}): Promise<KeyObject> {
       const { status, data, error } = await useFetch(combineURL(path), {
         baseURL: config.public.baseApiUrl,
         method: 'post',

@@ -1,3 +1,5 @@
+import type { KeyObject } from '~/@types/global-type';
+
 /**
  * mounted된후 사용하는 fetch
  * @returns
@@ -8,7 +10,7 @@ export const useRunFetch = () => {
   const combineURL = (path: string): string => (path.startsWith('/') ? path : '/'.concat(path));
 
   return {
-    async runGet(path: string, query: any = {}, headers: any = {}): Promise<AnyObject> {
+    async runGet(path: string, query: any = {}, headers: any = {}): Promise<KeyObject> {
       return await $fetch(combineURL(path), {
         baseURL: config.public.baseApiUrl,
         method: 'get',
@@ -18,7 +20,7 @@ export const useRunFetch = () => {
         },
       });
     },
-    async runPost(path: string, body: any = {}, headers: any = {}): Promise<AnyObject> {
+    async runPost(path: string, body: any = {}, headers: any = {}): Promise<KeyObject> {
       return await $fetch(combineURL(path), {
         baseURL: config.public.baseApiUrl,
         method: 'post',
