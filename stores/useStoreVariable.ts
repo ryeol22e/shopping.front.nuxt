@@ -1,7 +1,4 @@
 export const useStoreVariable = defineStore('useStoreVariable', () => {
-  const { setupGet } = useSetupFetch();
-  const { runGet } = useRunFetch();
-
   const boolLoading = ref(false);
 
   const isLoading = computed(() => boolLoading.value);

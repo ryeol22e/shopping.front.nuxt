@@ -1,10 +1,10 @@
-import useEnum from '~/composables/useEnum';
 import type { MemberInfo } from '~/@types/member-type';
+import { useAppFetch } from '~/composables/useAppFetch';
+import useEnum from '~/composables/useEnum';
 
 export const useStoreMember = defineStore('useStoreMember', () => {
   const { MEMBER_CONST } = useEnum();
-  const { setupGet } = useSetupFetch();
-  const { runGet, runPost } = useRunFetch();
+  const { getFetch, postFetch } = useAppFetch();
 
   const boolLogin = ref(false);
   const boolInfoSet = ref(false);
@@ -26,21 +26,21 @@ export const useStoreMember = defineStore('useStoreMember', () => {
     boolLogin.value = bool;
   };
   const authCheck = async (): Promise<void> => {
-    await setupGet('/member/auth')
-      .then((res: any) => (boolLogin.value = JSON.parse(res.data)))
-      .catch((error) => console.log(error));
+    const isAuth = await getFetch<boolean>('/member/auth');
+
+    boolLogin.value = isAuth || false;
   };
   const loginProcess = async (param: MemberInfo): Promise<void> => {
-    await runPost('/member/login', param)
+    await postFetch('/member/login', param)
       .then((res: any) => {
         boolLogin.value = JSON.parse(res);
       })
       .catch((error) => console.log(error));
   };
   const setMemberInfo = async (): Promise<void> => {
-    await setupGet('/member/info')
-      .then((res: any) => {
-        userInfo.value = res.data;
+    await getFetch('/member/info')
+      .then((data: any) => {
+        userInfo.value = data;
       })
       .then(() => {
         boolInfoSet.value = true;
@@ -48,15 +48,15 @@ export const useStoreMember = defineStore('useStoreMember', () => {
       .catch((error) => console.log(error));
   };
   const logoutProcess = async (): Promise<void> => {
-    await runGet('/member/logout').catch((error) => console.log(error));
+    await getFetch('/member/logout').catch((error) => console.log(error));
   };
   const signUpProcess = async (param: any): Promise<void> => {
-    await runPost('/member/join', param)
+    await postFetch('/member/join', param)
       .then((res: any) => (signUpResult.value = res.data))
       .catch((error) => console.log(error));
   };
   const setAuthNumber = async (param: any): Promise<void> => {
-    await runPost('/member/auth/number', param)
+    await postFetch('/member/auth/number', param)
       .then((res: any) => (authNumber.value = String(res.data).substring(0, res.data.lastIndexOf('.'))))
       .catch((error) => console.log(error));
   };

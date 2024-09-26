@@ -8,9 +8,9 @@
 </template>
 
 <script setup lang="ts">
-  const storeCommon = useStoreCommon();
+  const { setHeaders } = useStoreCommon();
 
-  await storeCommon.setHeaders({
+  setHeaders({
     codeType: '10000',
     codeDepth: '1',
     useYn: 'Y',

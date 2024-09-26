@@ -20,6 +20,8 @@
 </template>
 
 <script setup lang="ts">
+  import type { MemberInfo } from '~/@types/member-type';
+
   const { isEmpty } = useUtils();
   const { appLocalStorage } = useStorage();
   const { getItem, setItem } = appLocalStorage();
@@ -61,9 +63,6 @@
     return true;
   };
 
-  definePageMeta({
-    key: (route) => route.fullPath,
-  });
   onMounted(() => {
     data.memberId = isEmpty(getItem('memberId')) ? '' : getItem('memberId');
     remember.value = isEmpty(data.memberId);

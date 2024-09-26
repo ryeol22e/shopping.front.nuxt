@@ -1,10 +1,10 @@
 export const useStoreBo = defineStore('useStoreBo', () => {
   const router = useRouter();
-  const { runPost } = useRunFetch();
+  const { postFetch } = useAppFetch();
   const bannerInfo = ref({});
 
-  const registBannerInfo = (param: any): void => {
-    runPost('/admin/banner/save', param)
+  const registBannerInfo = async (param: any) => {
+    await postFetch('/admin/banner/save', param)
       .then((res: any) => {
         const result = res.data;
 
