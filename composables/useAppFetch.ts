@@ -8,28 +8,21 @@ export const useAppFetch = () => {
     async getFetch<T>(path: string, query: object = {}, headers: object = {}) {
       const isHydrating = nuxtApp.isHydrating;
       const isMounted = nuxtApp.vueApp._instance?.isMounted;
+      const options = {
+        baseURL: config.public.baseApiUrl as string,
+        query,
+        headers: {
+          ...headers,
+          'X-forwarded-for': storeConfig.getClientIp,
+        },
+      };
 
       if (!isHydrating && isMounted) {
-        const data = await $fetch(combineURL(path), {
-          baseURL: config.public.baseApiUrl,
-          method: 'get',
-          query,
-          headers: {
-            ...headers,
-            'x-forwarded-for': storeConfig.getClientIp,
-          },
-        });
+        const data = await $fetch(combineURL(path), { ...options, method: 'get' });
 
         return Promise.resolve(data as T);
       } else {
-        const { data } = await useFetch(combineURL(path), {
-          baseURL: config.public.baseApiUrl,
-          method: 'get',
-          query,
-          headers: {
-            'x-forwarded-for': storeConfig.getClientIp,
-          },
-        });
+        const { data } = await useFetch(combineURL(path), { ...options, method: 'get' });
 
         return Promise.resolve(data.value as T);
       }
@@ -37,28 +30,21 @@ export const useAppFetch = () => {
     async postFetch<T>(path: string, body: object = {}, headers: object = {}) {
       const isHydrating = nuxtApp.isHydrating;
       const isMounted = nuxtApp.vueApp._instance?.isMounted;
+      const options = {
+        baseURL: config.public.baseApiUrl,
+        body,
+        headers: {
+          ...headers,
+          'X-forwarded-for': storeConfig.getClientIp,
+        },
+      };
 
       if (!isHydrating && isMounted) {
-        const data = await $fetch(combineURL(path), {
-          baseURL: config.public.baseApiUrl,
-          method: 'post',
-          body,
-          headers: {
-            ...headers,
-            'x-forwarded-for': storeConfig.getClientIp,
-          },
-        });
+        const data = await $fetch(combineURL(path), { ...options, method: 'post' });
 
         return Promise.resolve(data as T);
       } else {
-        const { data } = await useFetch(combineURL(path), {
-          baseURL: config.public.baseApiUrl,
-          body,
-          headers: {
-            ...headers,
-            'x-forwarded-for': storeConfig.getClientIp,
-          },
-        });
+        const { data } = await useFetch(combineURL(path), { ...options, method: 'post' });
 
         return Promise.resolve(data.value as T);
       }
