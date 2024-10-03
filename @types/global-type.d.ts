@@ -21,3 +21,13 @@ export declare type HeadObject = {
   htmlAttrs?: HtmlAttributes;
   bodyAttrs?: BodyAttributes;
 };
+
+export declare type CommonField = {
+  codeId: number;
+  codeType: string;
+  codeDepth: number;
+  codeName: string;
+  useYn: string;
+  addInfo1: strin;
+  addInfo2: string;
+};

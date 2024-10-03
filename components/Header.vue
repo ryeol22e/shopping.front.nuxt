@@ -12,7 +12,7 @@
     </QToolbar>
     <QToolbar insert>
       <QBreadcrumbs active-color="primary" style="font-size: 16px">
-        <NuxtLink class="text-white" v-if="!isEmpty(headers as Array<any>)" v-for="header of headers" :key="header.codeId" :to="{ path: header.addInfo2 }">
+        <NuxtLink class="text-white" v-if="!isEmpty(getHeaders as CommonField[])" v-for="header of getHeaders" :key="header.codeId" :to="{ path: header.addInfo2 }">
           <QBreadcrumbsEl :label="header.codeName" />
         </NuxtLink>
         <NuxtLink v-if="userRole === MEMBER_CONST.VIP || userRole === MEMBER_CONST.ADMIN" to="/display/vip" class="text-white">
@@ -50,14 +50,16 @@
 </template>
 
 <script setup lang="ts">
+  import type { CommonField } from '~/@types/global-type';
+
   const { isLogin, userRole } = useLoginManager();
   const { MEMBER_CONST } = useEnum();
 
   const storeCommon = useStoreCommon();
+  const { getHeaders } = storeToRefs(storeCommon);
   const storeMember = useStoreMember();
 
   const mypageIsShow = ref(false);
-  const headers = computed<Array<any>>(() => storeCommon.getHeaders);
 
   const logout = async (): Promise<void> => {
     await storeMember.logoutProcess();

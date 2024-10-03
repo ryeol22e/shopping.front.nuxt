@@ -1,6 +1,8 @@
+import type { CommonField } from '~/@types/global-type';
+
 export const useStoreCommon = defineStore('useStoreCommon', () => {
   const { getFetch } = useAppFetch();
-  const headers = ref([]);
+  const headers = ref<CommonField[]>([]);
   const adminLnb = ref([]);
   const mypageList = ref([]);
 
@@ -9,8 +11,8 @@ export const useStoreCommon = defineStore('useStoreCommon', () => {
   const getMypageList = computed(() => mypageList.value);
 
   const setHeaders = async (params: any): Promise<void> => {
-    await getFetch('/common/10000', params)
-      .then((res: any) => {
+    await getFetch<CommonField[]>('/common/10000', params)
+      .then((res: CommonField[]) => {
         headers.value = res;
       })
       .catch((error) => console.log(error));

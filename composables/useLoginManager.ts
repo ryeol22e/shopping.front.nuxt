@@ -4,11 +4,11 @@ import useEnum from './useEnum';
 const { MEMBER_CONST } = useEnum();
 
 export default () => {
-  const useMember = useStoreMember();
+  const { isLogin, getUserInfo } = storeToRefs(useStoreMember());
 
   return {
-    isLogin: useMember.isLogin,
-    userInfo: useMember.getUserInfo,
-    userRole: useMember.getUserInfo.memberRole || MEMBER_CONST.ANONYMOUS,
+    isLogin: isLogin.value,
+    userInfo: getUserInfo.value,
+    userRole: getUserInfo.value.memberRole || MEMBER_CONST.ANONYMOUS,
   };
 };

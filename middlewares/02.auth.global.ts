@@ -1,11 +1,11 @@
 export default defineNuxtRouteMiddleware(async (to, from) => {
-  const storeMember = useStoreMember();
+  const { authCheck, setMemberInfo, isLogin, isInfoSet } = useStoreMember();
 
-  await storeMember.authCheck();
+  await authCheck();
 
-  if (storeMember.isLogin) {
-    if (!storeMember.isInfoSet) {
-      await storeMember.setMemberInfo();
+  if (isLogin) {
+    if (!isInfoSet) {
+      await setMemberInfo();
     }
 
     if (to.name === 'login') {

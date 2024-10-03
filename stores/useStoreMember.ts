@@ -1,4 +1,4 @@
-import type { MemberInfo } from '~/@types/member-type';
+import type { MemberInfo, UserInfo } from '~/@types/member-type';
 import { useAppFetch } from '~/composables/useAppFetch';
 import useEnum from '~/composables/useEnum';
 
@@ -8,7 +8,7 @@ export const useStoreMember = defineStore('useStoreMember', () => {
 
   const boolLogin = ref(false);
   const boolInfoSet = ref(false);
-  const userInfo = ref({
+  const userInfo = ref<UserInfo>({
     memberNo: '',
     memberName: '',
     memberRole: MEMBER_CONST.ANONYMOUS,
@@ -26,9 +26,7 @@ export const useStoreMember = defineStore('useStoreMember', () => {
     boolLogin.value = bool;
   };
   const authCheck = async (): Promise<void> => {
-    const isAuth = await getFetch<boolean>('/member/auth');
-
-    boolLogin.value = isAuth || false;
+    boolLogin.value = (await getFetch<boolean>('/member/auth')) || false;
   };
   const loginProcess = async (param: MemberInfo): Promise<void> => {
     await postFetch('/member/login', param)
