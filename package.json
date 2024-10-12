@@ -13,19 +13,19 @@
 	"devDependencies": {
 		"@nuxt/devtools": "latest",
 		"nuxt": "^3.13.2",
-		"vue": "^3.4.33",
-		"vue-router": "^4.4.0"
+		"vue": "^3.5.12",
+		"vue-router": "^4.4.5"
 	},
 	"dependencies": {
-		"@nuxtjs/device": "^3.1.1",
-		"@pinia/nuxt": "^0.5.1",
+		"@nuxtjs/device": "^3.2.4",
+		"@pinia/nuxt": "^0.5.5",
 		"@quasar/extras": "^1.16.11",
 		"nuxt-quasar-ui": "^2.0.8",
-		"pinia": "^2.1.7",
+		"pinia": "^2.2.4",
 		"qs": "^6.12.3",
 		"quasar": "^2.15.2",
 		"sass": "^1.72.0",
 		"sass-loader": "^14.1.1",
-		"typescript": "^5.4.2"
+		"typescript": "^5.6.3"
 	}
 }
