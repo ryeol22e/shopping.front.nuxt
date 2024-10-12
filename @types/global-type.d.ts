@@ -1,7 +1,7 @@
-export declare type KeyObject = {
+export type KeyObject = {
   [key: string | number];
 };
-export declare type SEOMetaObject = {
+export type SEOMetaObject = {
   title?: MaybeComputedRefOrPromise;
   ogTitle?: MaybeComputedRefOrPromise;
   description?: MaybeComputedRefOrPromise;
@@ -9,7 +9,7 @@ export declare type SEOMetaObject = {
   ogImage?: MaybeComputedRefOrPromise;
   twitterCard?: MaybeComputedRefOrPromise;
 };
-export declare type HeadObject = {
+export type HeadObject = {
   title?: Title;
   titleTemplate?: string | ((title?: string) => string);
   base?: Base;
@@ -22,7 +22,7 @@ export declare type HeadObject = {
   bodyAttrs?: BodyAttributes;
 };
 
-export declare type CommonField = {
+export type CommonField = {
   codeId: number;
   codeType: string;
   codeDepth: number;

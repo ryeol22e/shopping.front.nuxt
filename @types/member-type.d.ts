@@ -1,9 +1,9 @@
-export declare type MemberInfo = {
+export type MemberInfo = {
   memberId: string;
   memberPassword: string;
 };
 
-export declare type UserInfo = {
+export type UserInfo = {
   memberNo: string;
   memberName: string;
   memberRole: string;

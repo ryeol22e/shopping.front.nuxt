@@ -1,4 +1,4 @@
-export declare interface DateType {
+export interface DateType {
   year: number;
   month: number;
   day: number;
@@ -6,7 +6,7 @@ export declare interface DateType {
   min: number;
   sec: number;
 }
-export declare interface DatePattern {
+export interface DatePattern {
   datePattern: string;
   timePattern: string;
 }
