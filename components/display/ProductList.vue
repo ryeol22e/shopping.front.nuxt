@@ -1,6 +1,6 @@
 <template>
-  <div v-if="!isEmpty(list as Array<any>)" class="row items-start q-gutter-md">
-    <NuxtLink v-for="item of list" :key="item.prdtNo" :to="`/product/${item.prdtNo}`">
+  <div v-if="!isEmpty(getList as Array<any>)" class="row items-start q-gutter-md">
+    <NuxtLink v-for="item of getList" :key="item.prdtNo" :to="`/product/${item.prdtNo}`">
       <QCard class="my-card">
         <Image :src="`${item.imagePath}/${item.imageName}`" :alt="item.prdtName" />
 
@@ -17,9 +17,7 @@
 
 <script setup lang="ts">
   const { isEmpty, insertComma } = useUtils();
-  const storeProduct = useStoreProduct();
-
-  const list = computed(() => storeProduct.getList);
+  const { getList } = storeToRefs(useStoreProduct());
 </script>
 
 <style lang="scss" scoped>

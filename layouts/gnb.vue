@@ -10,7 +10,7 @@
 <script setup lang="ts">
   const { setHeaders } = useStoreCommon();
 
-  setHeaders({
+  await setHeaders({
     codeType: '10000',
     codeDepth: '1',
     useYn: 'Y',

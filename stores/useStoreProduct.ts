@@ -9,11 +9,11 @@ export const useStoreProduct = defineStore('useStoreProduct', () => {
   const saveProductResult = ref<boolean>(false);
 
   const setList = async (cateNo: string): Promise<void> => {
-    list.value = (await getFetch('/display/product/list', {
-      cateNo: cateNo,
+    list.value = await getFetch<Array<any>>('/display/product/list', {
+      cateNo,
       useYn: 'Y',
       dispYn: 'Y',
-    }).catch((error) => [])) as Array<any>;
+    }).catch(() => []);
   };
   const setDetail = async (prdtNo: string): Promise<void> => {
     await getFetch(`/product/${prdtNo}`)
