@@ -29,11 +29,7 @@ export const useStoreMember = defineStore('useStoreMember', () => {
     boolLogin.value = (await getFetch<boolean>('/member/auth')) || false;
   };
   const loginProcess = async (param: MemberInfo): Promise<void> => {
-    await postFetch('/member/login', param)
-      .then((res: any) => {
-        boolLogin.value = JSON.parse(res);
-      })
-      .catch((error) => console.log(error));
+    boolLogin.value = await postFetch<boolean>('/member/login', param).catch(() => false);
   };
   const setMemberInfo = async (): Promise<void> => {
     await getFetch('/member/info')
@@ -49,9 +45,7 @@ export const useStoreMember = defineStore('useStoreMember', () => {
     await getFetch('/member/logout').catch((error) => console.log(error));
   };
   const signUpProcess = async (param: any): Promise<void> => {
-    await postFetch('/member/join', param)
-      .then((res: any) => (signUpResult.value = res.data))
-      .catch((error) => console.log(error));
+    signUpResult.value = await postFetch<any>('/member/join', param).catch(() => null);
   };
   const setAuthNumber = async (param: any): Promise<void> => {
     await postFetch('/member/auth/number', param)

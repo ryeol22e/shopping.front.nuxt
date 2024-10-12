@@ -16,20 +16,14 @@ export const useStoreProduct = defineStore('useStoreProduct', () => {
     }).catch(() => []);
   };
   const setDetail = async (prdtNo: string): Promise<void> => {
-    await getFetch(`/product/${prdtNo}`)
-      .then((res: any) => (detail.value = res.data))
-      .catch((error) => console.log(error));
+    detail.value = await getFetch<any>(`/product/${prdtNo}`).catch(() => {});
   };
   const setCateList = async (param: any): Promise<void> => {
-    await getFetch(`/cate/list`, param)
-      .then((res: any) => (cateList.value = res.data))
-      .catch((error) => console.log(error));
+    cateList.value = await getFetch<any>(`/cate/list`, param).catch(() => {});
   };
   const setProductData = async (param: FormData): Promise<void> => {
     const prdtNo = param.get('prdtNo');
-    await getFetch(`/product/${prdtNo}`, param)
-      .then((res: any) => (saveProductResult.value = res.data || false))
-      .catch((error) => console.log(error));
+    saveProductResult.value = await getFetch<boolean>(`/product/${prdtNo}`, param).catch(() => false);
   };
 
   return {

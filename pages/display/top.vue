@@ -10,13 +10,11 @@
   import ProductList from '~/components/display/ProductList.vue';
 
   const { setList } = useStoreProduct();
-  const nuxtApp = useNuxtApp();
+
   definePageMeta({
     key: (route) => route.fullPath,
     name: 'Top',
   });
 
-  onMounted(async () => {
-    await setList('1357900001');
-  });
+  await setList('1357900001');
 </script>
