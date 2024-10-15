@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-  import ProductList from '~/components/display/ProductList.vue';
+  import ProductList from '~/components/composition/display/ProductList.vue';
 
   const { setList } = useStoreProduct();
 

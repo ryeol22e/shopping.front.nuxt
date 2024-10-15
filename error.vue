@@ -13,8 +13,8 @@
 </template>
 
 <script setup lang="ts">
-  import NotFound from '~/components/error/NotFound.vue';
-  import ServerError from '~/components/error/ServerError.vue';
+  import NotFound from '~/components/composition/error/NotFound.vue';
+  import ServerError from '~/components/composition/error/ServerError.vue';
 
   const error = useError();
   const code = error.value?.statusCode;

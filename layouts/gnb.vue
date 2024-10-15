@@ -3,7 +3,6 @@
     <Header />
     <slot />
     <Footer />
-    <Loading />
   </QLayout>
 </template>
 
