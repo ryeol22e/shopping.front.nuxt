@@ -31,3 +31,8 @@ export type CommonField = {
   addInfo1: strin;
   addInfo2: string;
 };
+
+export interface DisplayHeader {
+  title?: string;
+  desc?: string;
+}

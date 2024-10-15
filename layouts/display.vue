@@ -4,10 +4,8 @@
 </template>
 
 <script setup lang="ts">
-  interface DisplayHeader {
-    title?: string;
-    desc?: string;
-  }
+  import type { DisplayHeader } from '~/@types/global-type';
+
   const props = withDefaults(defineProps<DisplayHeader>(), {
     title: '',
     desc: '',

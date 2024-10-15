@@ -1,6 +1,6 @@
 <template>
   <NuxtLayout name="gnb">
-    <NuxtLoadingIndicator color="green" />
+    <NuxtLoadingIndicator color="green" :height="5" />
 
     <QPageContainer>
       <NuxtPage :page-key="(route) => route.fullPath" />
