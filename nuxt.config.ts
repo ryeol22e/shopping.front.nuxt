@@ -83,7 +83,7 @@ export default () => {
       dirs: [resolve('./stores'), '~/stores', resolve('./composables'), '~/composables', resolve('./components'), '~/components'],
     },
     devServer: {
-      https: true,
+      https: false,
       port: parseInt(port) || 3000,
     },
     nitro: {
