@@ -1,4 +1,7 @@
 'use strict';
+
+import type { KeyObject } from '~/@types/global-type';
+
 const { isEmpty, hasObjectProperty } = useUtils();
 
 export default () => {
@@ -7,10 +10,10 @@ export default () => {
      * document.cookie object로 convert
      * @returns
      */
-    const cookieObject = (): AnyObject => {
+    const cookieObject = (): KeyObject => {
       const list = document.cookie.split('; ');
 
-      const object: AnyObject = {};
+      const object: KeyObject = {};
 
       list.forEach((item) => {
         const regex = /^[^{|^[]*[a-zA-Z|ㄱ-ㅎ가-힣][^}|^\]]*$/gi;

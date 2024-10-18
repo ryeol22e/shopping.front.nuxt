@@ -6,7 +6,8 @@ export default () => {
    * custom sessionStorage
    */
   const appSession = (): any => {
-    const setItem = (key: string, value: any): void => sessionStorage.setItem(key, encodeURIComponent(JSON.stringify(value)));
+    const setItem = (key: string, value: any): void =>
+      sessionStorage.setItem(key, encodeURIComponent(JSON.stringify(value)));
     const removeItem = (key: string): void => sessionStorage.removeItem(key);
     const getItem = (key: string): any => {
       const value: any = decodeURIComponent(sessionStorage.getItem(key) as any);
