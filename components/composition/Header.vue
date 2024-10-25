@@ -12,10 +12,20 @@
     </QToolbar>
     <QToolbar insert>
       <QBreadcrumbs active-color="primary" style="font-size: 16px">
-        <NuxtLink class="text-white" v-if="!isEmpty(getHeaders as CommonField[])" v-for="header of getHeaders" :key="header.codeId" :to="{ path: header.addInfo2 }">
+        <NuxtLink
+          class="text-white"
+          v-if="!isEmpty(getHeaders)"
+          v-for="header of getHeaders"
+          :key="header.codeId"
+          :to="{ path: header.addInfo2 }"
+        >
           <QBreadcrumbsEl :label="header.codeName" />
         </NuxtLink>
-        <NuxtLink v-if="userRole === MEMBER_CONST.VIP || userRole === MEMBER_CONST.ADMIN" to="/display/vip" class="text-white">
+        <NuxtLink
+          v-if="userRole === MEMBER_CONST.VIP || userRole === MEMBER_CONST.ADMIN"
+          to="/display/vip"
+          class="text-white"
+        >
           <QBreadcrumbsEl label="VIP" />
         </NuxtLink>
 
@@ -23,7 +33,16 @@
           <NuxtLink v-if="!isLogin" to="/login" class="text-white">
             <QBreadcrumbsEl label="Login" />
           </NuxtLink>
-          <a v-else @click="mypageOpen" href="javascript:void(0);" class="text-white" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">Mypage</a>
+          <a
+            v-else
+            @click="mypageOpen"
+            href="javascript:void(0);"
+            class="text-white"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#staticBackdrop"
+            aria-controls="staticBackdrop"
+            >Mypage</a
+          >
 
           <a class="text-white">·</a>
 

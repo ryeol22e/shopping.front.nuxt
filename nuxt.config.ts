@@ -80,7 +80,7 @@ export default () => {
     ],
     imports: {
       autoImport: true,
-      dirs: [resolve('./stores'), '~/stores', resolve('./composables'), '~/composables', resolve('./components'), '~/components'],
+      dirs: [resolve('./stores'), resolve('./composables'), resolve('./components')],
     },
     devServer: {
       https: false,

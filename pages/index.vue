@@ -1,7 +1,21 @@
 <template>
   <QPage>
-    <QCarousel v-if="!isEmpty(bannerList as Array<any>)" arrows animated infinite v-model="slide" :autoplay="true" transition-prev="slide-right" transition-next="slide-left">
-      <QCarouselSlide v-for="(item, index) of bannerList" :key="index" :name="index" :img-src="`${item.imagePath}/${item.imageName}`">
+    <QCarousel
+      v-if="!isEmpty(bannerList)"
+      arrows
+      animated
+      infinite
+      v-model="slide"
+      :autoplay="true"
+      transition-prev="slide-right"
+      transition-next="slide-left"
+    >
+      <QCarouselSlide
+        v-for="(item, index) of bannerList"
+        :key="index"
+        :name="index"
+        :img-src="`${item.imagePath}/${item.imageName}`"
+      >
         <div class="absolute-bottom custom-caption">
           <div class="text-h2">{{ item.title }}</div>
           <div class="text-subtitle1">{{ item.description }}</div>
@@ -28,12 +42,11 @@
   const { isEmpty } = useUtils();
   const slide = ref(0);
   const storeMain = useStoreMain();
-  const bannerList = computed((): Array<any> => storeMain.getBannerList);
+  const bannerList = computed(() => storeMain.getBannerList);
 
   definePageMeta({
     key: (route) => route.fullPath,
   });
-  onMounted(() => {});
 
   await storeMain.setBannerList({
     bannerType: '10000',

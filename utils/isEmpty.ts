@@ -4,7 +4,7 @@
  * @param data
  * @returns
  */
-export const isEmpty = <T>(data: T): data is T => {
+export const isEmpty = <T>(data: T): boolean => {
   let bool = true;
 
   if (data !== undefined && data !== null) {

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!isEmpty(getList as Array<any>)" class="row items-start q-gutter-md">
+  <div v-if="!isEmpty(getList)" class="row items-start q-gutter-md">
     <NuxtLink v-for="item of getList" :key="item.prdtNo" :to="`/product/${item.prdtNo}`">
       <QCard class="my-card">
         <Image :src="`${item.imagePath}/${item.imageName}`" :alt="item.prdtName" />
