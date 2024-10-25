@@ -32,8 +32,8 @@ export const useStoreMember = defineStore('useStoreMember', () => {
     boolLogin.value = await postFetch<boolean>('/member/login', param).catch(() => false);
   };
   const setMemberInfo = async (): Promise<void> => {
-    await getFetch('/member/info')
-      .then((data: any) => {
+    await getFetch<UserInfo>('/member/info')
+      .then((data: UserInfo) => {
         userInfo.value = data;
       })
       .then(() => {
@@ -45,12 +45,12 @@ export const useStoreMember = defineStore('useStoreMember', () => {
     await getFetch('/member/logout').catch((error) => console.log(error));
   };
   const signUpProcess = async (param: any): Promise<void> => {
-    signUpResult.value = await postFetch<any>('/member/join', param).catch(() => null);
+    signUpResult.value = await postFetch<boolean>('/member/join', param).catch(() => false);
   };
-  const setAuthNumber = async (param: any): Promise<void> => {
-    await postFetch('/member/auth/number', param)
-      .then((res: any) => (authNumber.value = String(res.data).substring(0, res.data.lastIndexOf('.'))))
-      .catch((error) => console.log(error));
+  const setAuthNumber = async (param: object): Promise<void> => {
+    authNumber.value = await postFetch<string>('/member/auth/number', param)
+      .then((data: string) => String(data).substring(0, data.lastIndexOf('.')))
+      .catch(() => '');
   };
 
   return {

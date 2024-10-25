@@ -10,13 +10,10 @@ export const useStoreConfig = defineStore('storeConfig', () => {
     acessToken.value = token;
   };
 
-  const getClientIp = computed(() => clientIp.value);
-  const getAcessToken = computed(() => acessToken.value);
-
   return {
     setClientIp,
     setAcessToken,
-    getClientIp,
-    getAcessToken,
+    getClientIp: computed(() => clientIp.value),
+    getAcessToken: computed(() => acessToken.value),
   };
 });

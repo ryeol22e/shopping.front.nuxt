@@ -1,25 +1,25 @@
-import type { KeyObject } from '~/@types/global-type';
+import type { CategoryInfo, ProductInfo } from '~/@types/business-type';
 
 export const useStoreProduct = defineStore('useStoreProduct', () => {
   const { getFetch } = useAppFetch();
 
-  const list = ref<Array<any>>([]);
-  const detail = ref<KeyObject>({});
-  const cateList = ref<Array<any>>([]);
+  const list = ref<Array<ProductInfo>>([]);
+  const detail = ref<ProductInfo>();
+  const cateList = ref<Array<CategoryInfo>>([]);
   const saveProductResult = ref<boolean>(false);
 
   const setList = async (cateNo: string): Promise<void> => {
-    list.value = await getFetch<Array<any>>('/display/product/list', {
+    list.value = await getFetch<Array<ProductInfo>>('/display/product/list', {
       cateNo,
       useYn: 'Y',
       dispYn: 'Y',
     }).catch(() => []);
   };
   const setDetail = async (prdtNo: string): Promise<void> => {
-    detail.value = await getFetch<any>(`/product/${prdtNo}`).catch(() => {});
+    detail.value = await getFetch<ProductInfo>(`/product/${prdtNo}`).catch(() => ({} as ProductInfo));
   };
   const setCateList = async (param: any): Promise<void> => {
-    cateList.value = await getFetch<any>(`/cate/list`, param).catch(() => {});
+    cateList.value = await getFetch<Array<CategoryInfo>>(`/cate/list`, param).catch(() => []);
   };
   const setProductData = async (param: FormData): Promise<void> => {
     const prdtNo = param.get('prdtNo');
