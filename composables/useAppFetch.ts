@@ -30,6 +30,7 @@ export const useAppFetch = () => {
         const { data } = await useAsyncData(`path:${JSON.stringify(query)}`, () =>
           useRequestFetch()(combineURL(path), { method: 'get', ...options }),
         );
+
         return Promise.resolve(data.value as T);
       }
     },
@@ -58,6 +59,7 @@ export const useAppFetch = () => {
         const { data } = await useAsyncData(`path:${JSON.stringify(body)}`, () =>
           useRequestFetch()(combineURL(path), { method: 'post', ...options }),
         );
+
         return Promise.resolve(data.value as T);
       }
     },
