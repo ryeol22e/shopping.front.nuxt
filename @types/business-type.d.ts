@@ -41,5 +41,5 @@ export type ProductInfo = {
   sellPrice: string;
   imagePath: string;
   imageFullPath: string;
-  file: File;
+  file?: File;
 };

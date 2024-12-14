@@ -4,7 +4,18 @@ export const useStoreProduct = defineStore('useStoreProduct', () => {
   const { getFetch } = useAppFetch();
 
   const list = ref<Array<ProductInfo>>([]);
-  const detail = ref<ProductInfo>();
+  const detail = ref<ProductInfo>({
+    prdtNo: '',
+    cateNo: '',
+    dispYn: 'N',
+    prdtName: '',
+    imageFullPath: '',
+    imagePath: '',
+    sellPrice: '',
+    useYn: 'N',
+    normalPrice: '',
+    prdtIndex: -1,
+  });
   const cateList = ref<Array<CategoryInfo>>([]);
   const saveProductResult = ref<boolean>(false);
 

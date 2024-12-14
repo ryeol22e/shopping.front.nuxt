@@ -3,7 +3,7 @@
     <h1>{{ detail.prdtName }}</h1>
     <p>{{ prdtNo }}</p>
     <div>
-      <span>판매가 : {{ insertComma(detail.sellPrice) }}원</span>
+      <span>판매가 : {{ insertComma(parseInt(detail.sellPrice)) }}원</span>
     </div>
   </QPage>
 </template>
