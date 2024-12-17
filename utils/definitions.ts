@@ -1,4 +1,4 @@
-export function debounceHandler<T extends (...args: Array<any>) => Promise<void> | void>(method: T) {
+export function debounceHandler<T extends (...args: Array<any>) => void>(method: T) {
   let timer: NodeJS.Timeout | undefined;
 
   return function (this: unknown, ...args: Parameters<T>) {
@@ -7,10 +7,8 @@ export function debounceHandler<T extends (...args: Array<any>) => Promise<void>
       timer = undefined;
     }
 
-    return Promise.resolve(() => {
-      timer = setTimeout(async () => {
-        return await method.apply(this, args);
-      }, 300);
-    });
+    timer = setTimeout(() => {
+      method.apply(this, args);
+    }, 300);
   };
 }
