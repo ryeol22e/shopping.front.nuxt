@@ -14,6 +14,8 @@ export type BannerInfo = {
   rgstDtm: string;
   modDtm: string;
   file: File;
+  imagePath: string;
+  imageName: string;
 };
 
 /**
