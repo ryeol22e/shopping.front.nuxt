@@ -1,3 +1,6 @@
+import type { UseFetchOptions } from '#app';
+import type { NitroFetchOptions, NitroFetchRequest } from 'nitropack';
+
 export const useAppFetch = () => {
   const nuxtApp = useNuxtApp();
   const config = useRuntimeConfig();
@@ -6,12 +9,11 @@ export const useAppFetch = () => {
 
   return {
     async getFetch<T>(path: string, query: object = {}, headers: object = {}) {
-      const isHydrating = nuxtApp.isHydrating;
-      const isMounted = nuxtApp.vueApp._instance?.isMounted;
-      const csr = import.meta.client && !isHydrating && isMounted;
-      const ssr = import.meta.server && !isHydrating && !isMounted;
-      const options = {
+      const isHydrate = nuxtApp.isHydrating;
+      const isClient = import.meta.client;
+      const opts: UseFetchOptions<T> = {
         baseURL: config.public.baseApiUrl as string,
+        method: 'GET',
         query,
         headers: {
           ...headers,
@@ -19,28 +21,23 @@ export const useAppFetch = () => {
         },
       };
 
-      if (csr && !ssr) {
-        const data = await $fetch(combineURL(path), { method: 'get', ...options });
+      if (isClient && !isHydrate) {
+        const data = await $fetch(combineURL(path), <NitroFetchOptions<NitroFetchRequest>>opts);
         return Promise.resolve(data as T);
       } else {
-        if (isHydrating) {
+        if (isClient) {
           await nextTick();
         }
-
-        const { data } = await useAsyncData(`path:${JSON.stringify(query)}`, () =>
-          useRequestFetch()(combineURL(path), { method: 'get', ...options }),
-        );
-
-        return Promise.resolve(data.value as T);
+        const data = await useFetch(combineURL(path), opts).then((res) => res.data.value);
+        return Promise.resolve(data as T);
       }
     },
     async postFetch<T>(path: string, body: object = {}, headers: object = {}) {
-      const isHydrating = nuxtApp.isHydrating;
-      const isMounted = nuxtApp.vueApp._instance?.isMounted;
-      const csr = import.meta.client && !isHydrating && isMounted;
-      const ssr = import.meta.server && !isHydrating && !isMounted;
-      const options = {
+      const isHydrate = nuxtApp.isHydrating;
+      const isClient = import.meta.client;
+      const opts: UseFetchOptions<T> = {
         baseURL: config.public.baseApiUrl,
+        method: 'POST',
         body,
         headers: {
           ...headers,
@@ -48,19 +45,15 @@ export const useAppFetch = () => {
         },
       };
 
-      if (csr && !ssr) {
-        const data = await $fetch(combineURL(path), { ...options, method: 'post' });
+      if (isClient && !isHydrate) {
+        const data = await $fetch(combineURL(path), <NitroFetchOptions<NitroFetchRequest>>opts);
         return Promise.resolve(data as T);
       } else {
-        if (isHydrating) {
+        if (isClient) {
           await nextTick();
         }
-
-        const { data } = await useAsyncData(`path:${JSON.stringify(body)}`, () =>
-          useRequestFetch()(combineURL(path), { method: 'post', ...options }),
-        );
-
-        return Promise.resolve(data.value as T);
+        const data = await useFetch(combineURL(path), opts).then((res) => res.data.value);
+        return Promise.resolve(data as T);
       }
     },
   };
