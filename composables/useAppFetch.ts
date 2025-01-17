@@ -9,6 +9,8 @@ export const useAppFetch = () => {
 
   return {
     async getFetch<T>(path: string, query: object = {}, headers: object = {}) {
+      const combinePath = combineURL(path);
+      const checkPath = useState('checkPath', () => combinePath);
       const isHydrate = nuxtApp.isHydrating;
       const isClient = import.meta.client;
       const opts: UseFetchOptions<T> = {
@@ -21,18 +23,17 @@ export const useAppFetch = () => {
         },
       };
 
-      if (isClient && !isHydrate) {
-        const data = await $fetch(combineURL(path), <NitroFetchOptions<NitroFetchRequest>>opts);
+      if (isClient && (!isHydrate || checkPath.value !== combinePath)) {
+        const data = await $fetch(combinePath, <NitroFetchOptions<NitroFetchRequest>>opts);
         return Promise.resolve(data as T);
       } else {
-        if (isClient) {
-          await nextTick();
-        }
-        const data = await useFetch(combineURL(path), opts).then((res) => res.data.value);
+        const data = await useFetch(combinePath, opts).then((res) => res.data.value);
         return Promise.resolve(data as T);
       }
     },
     async postFetch<T>(path: string, body: object = {}, headers: object = {}) {
+      const combinePath = combineURL(path);
+      const checkPath = useState('checkPath', () => combinePath);
       const isHydrate = nuxtApp.isHydrating;
       const isClient = import.meta.client;
       const opts: UseFetchOptions<T> = {
@@ -45,13 +46,10 @@ export const useAppFetch = () => {
         },
       };
 
-      if (isClient && !isHydrate) {
+      if (isClient && (!isHydrate || checkPath.value !== combinePath)) {
         const data = await $fetch(combineURL(path), <NitroFetchOptions<NitroFetchRequest>>opts);
         return Promise.resolve(data as T);
       } else {
-        if (isClient) {
-          await nextTick();
-        }
         const data = await useFetch(combineURL(path), opts).then((res) => res.data.value);
         return Promise.resolve(data as T);
       }
