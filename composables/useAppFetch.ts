@@ -1,13 +1,12 @@
-import type { UseFetchOptions } from '#app';
+import type { AsyncDataOptions, UseFetchOptions } from '#app';
 import type { NitroFetchOptions, NitroFetchRequest } from 'nitropack';
+import { hash } from 'ohash';
 
 export const useAppFetch = () => {
   const nuxtApp = useNuxtApp();
   const config = useRuntimeConfig();
   const storeConfig = useStoreConfig();
   const combineURL = (path: string): string => (path.startsWith('/') ? path : '/'.concat(path));
-  // const param =
-  // method === 'get' ? Object.values(opts?.query || '').join('') : Object.values(opts?.body || '').join('');
 
   return {
     async getFetch<T>(path: string, query: object = {}, headers: object = {}) {
@@ -23,16 +22,23 @@ export const useAppFetch = () => {
           'X-forwarded-for': storeConfig.getClientIp,
         },
       };
-      const fetchKey = `${combinePath}${Object.values(opts?.query || '').join('')}`;
-      const checkFetchKey = useState('checkGetFetchKey', () => new Map());
+      const key = hash(generateKey(path, opts));
 
-      if (isClient && (!isHydrate || !checkFetchKey.value.has(fetchKey))) {
+      if (isClient && !isHydrate) {
         const data = await $fetch(combinePath, <NitroFetchOptions<NitroFetchRequest>>opts);
         return Promise.resolve(data as T);
       } else {
-        const data = await useFetch(combinePath, opts).then((res) => res.data.value);
-        checkFetchKey.value.set(fetchKey, '');
-        return Promise.resolve(data as T);
+        const { status, execute, data } = await useAsyncData<T>(
+          key,
+          () => $fetch(combinePath, <NitroFetchOptions<NitroFetchRequest>>opts),
+          <AsyncDataOptions<T>>opts,
+        );
+
+        if (isClient && status.value === 'idle') {
+          await execute();
+        }
+
+        return Promise.resolve(data.value as T);
       }
     },
     async postFetch<T>(path: string, body: object = {}, headers: object = {}) {
@@ -48,16 +54,39 @@ export const useAppFetch = () => {
           'X-forwarded-for': storeConfig.getClientIp,
         },
       };
-      const fetchKey = `${combinePath}${Object.values(opts?.body || '').join('')}`;
-      const checkFetchKey = useState('checkPostFetchKey', () => new Map());
+      const key = hash(generateKey(path, opts));
 
-      if (isClient && (!isHydrate || !checkFetchKey.value.has(fetchKey))) {
+      if (isClient && !isHydrate) {
         const data = await $fetch(combineURL(path), <NitroFetchOptions<NitroFetchRequest>>opts);
         return Promise.resolve(data as T);
       } else {
-        const data = await useFetch(combineURL(path), opts).then((res) => res.data.value);
-        return Promise.resolve(data as T);
+        const { status, execute, data } = await useAsyncData<T>(
+          key,
+          () => $fetch(combinePath, <NitroFetchOptions<NitroFetchRequest>>opts),
+          <AsyncDataOptions<T>>opts,
+        );
+
+        if (isClient && status.value === 'idle') {
+          await execute();
+        }
+
+        return Promise.resolve(data.value as T);
       }
     },
   };
+};
+
+const generateKey = <T>(path: string, opts: UseFetchOptions<T>) => {
+  const entries = Object.entries({ ...opts.params, ...opts.query, ...(<object>opts.body) });
+  let result = path;
+
+  for (const [key, value] of entries) {
+    if (Array.isArray(value)) {
+      result = result.concat(value.flat().join(''));
+    } else {
+      result = result.concat(`${value}`);
+    }
+  }
+
+  return result;
 };
