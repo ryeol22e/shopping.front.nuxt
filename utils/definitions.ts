@@ -12,3 +12,5 @@ export function debounceHandler<T extends (...args: Array<any>) => void>(method:
     }, 300);
   };
 }
+
+export function throttleHandler<T extends (...args: Array<any>) => void>(method: T) {}

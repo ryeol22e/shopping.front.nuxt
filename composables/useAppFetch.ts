@@ -2,6 +2,23 @@ import type { AsyncDataOptions, UseFetchOptions } from '#app';
 import type { NitroFetchOptions, NitroFetchRequest } from 'nitropack';
 import { hash } from 'ohash';
 
+interface AppFetchOptions<T> extends UseFetchOptions<T> {}
+
+const generateKey = <T>(path: string, opts: AppFetchOptions<T>) => {
+  const entries = Object.entries({ method: opts.method, ...opts.params, ...opts.query, ...(<object>opts.body) });
+  let result = path;
+
+  for (const value of new Map(entries).values()) {
+    if (Array.isArray(value)) {
+      result = result.concat(value.flat().join(''));
+    } else {
+      result = result.concat(`${value}`);
+    }
+  }
+
+  return hash(result);
+};
+
 export const useAppFetch = () => {
   const nuxtApp = useNuxtApp();
   const config = useRuntimeConfig();
@@ -13,7 +30,7 @@ export const useAppFetch = () => {
       const combinePath = combineURL(path);
       const isHydrate = nuxtApp.isHydrating;
       const isClient = import.meta.client;
-      const opts: UseFetchOptions<T> = {
+      const opts: AppFetchOptions<T> = {
         baseURL: config.public.baseApiUrl as string,
         method: 'GET',
         query,
@@ -25,12 +42,11 @@ export const useAppFetch = () => {
       const key = hash(generateKey(path, opts));
 
       if (isClient && !isHydrate) {
-        const data = await $fetch(combinePath, <NitroFetchOptions<NitroFetchRequest>>opts);
-        return Promise.resolve(data as T);
+        return $fetch<T>(combinePath, <NitroFetchOptions<NitroFetchRequest>>opts);
       } else {
-        const { status, execute, data } = await useAsyncData<T>(
+        const { status, execute, data, error } = await useAsyncData<T>(
           key,
-          () => $fetch(combinePath, <NitroFetchOptions<NitroFetchRequest>>opts),
+          () => $fetch<T>(combinePath, <NitroFetchOptions<NitroFetchRequest>>opts),
           <AsyncDataOptions<T>>opts,
         );
 
@@ -38,14 +54,20 @@ export const useAppFetch = () => {
           await execute();
         }
 
-        return Promise.resolve(data.value as T);
+        return new Promise<T>((resolve, reject) => {
+          if (status.value === 'success') {
+            resolve(data.value as T);
+          } else {
+            reject(error.value as Error);
+          }
+        });
       }
     },
     async postFetch<T>(path: string, body: object = {}, headers: object = {}) {
       const combinePath = combineURL(path);
       const isHydrate = nuxtApp.isHydrating;
       const isClient = import.meta.client;
-      const opts: UseFetchOptions<T> = {
+      const opts: AppFetchOptions<T> = {
         baseURL: config.public.baseApiUrl,
         method: 'POST',
         body,
@@ -57,12 +79,11 @@ export const useAppFetch = () => {
       const key = hash(generateKey(path, opts));
 
       if (isClient && !isHydrate) {
-        const data = await $fetch(combineURL(path), <NitroFetchOptions<NitroFetchRequest>>opts);
-        return Promise.resolve(data as T);
+        return $fetch<T>(combineURL(path), <NitroFetchOptions<NitroFetchRequest>>opts);
       } else {
-        const { status, execute, data } = await useAsyncData<T>(
+        const { status, execute, data, error } = await useAsyncData<T>(
           key,
-          () => $fetch(combinePath, <NitroFetchOptions<NitroFetchRequest>>opts),
+          () => $fetch<T>(combinePath, <NitroFetchOptions<NitroFetchRequest>>opts),
           <AsyncDataOptions<T>>opts,
         );
 
@@ -70,23 +91,14 @@ export const useAppFetch = () => {
           await execute();
         }
 
-        return Promise.resolve(data.value as T);
+        return new Promise<T>((resolve, reject) => {
+          if (status.value === 'success') {
+            resolve(data.value as T);
+          } else {
+            reject(error.value as Error);
+          }
+        });
       }
     },
   };
-};
-
-const generateKey = <T>(path: string, opts: UseFetchOptions<T>) => {
-  const entries = Object.entries({ ...opts.params, ...opts.query, ...(<object>opts.body) });
-  let result = path;
-
-  for (const [key, value] of entries) {
-    if (Array.isArray(value)) {
-      result = result.concat(value.flat().join(''));
-    } else {
-      result = result.concat(`${value}`);
-    }
-  }
-
-  return result;
 };
